@@ -3,15 +3,32 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@feathersjs/client": "^3.7.8",
+    "antd": "^3.20.1",
+    "mobx": "^5.11.0",
+    "mobx-react": "^6.1.1",
+    "mobx-react-form": "^2.0.4",
+    "mobx-react-router": "^4.0.7",
+    "mobx-state-tree": "^3.14.0",
+    "moment": "^2.24.0",
+    "prop-types": "^15.7.2",
+    "rambler-ui": "^3.43.0",
+    "ramda": "^0.26.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1"
+    "react-router-dom": "^5.0.1",
+    "react-scripts": "3.0.1",
+    "recompose": "^0.30.0",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.87.2",
+    "socket.io-client": "^2.2.0",
+    "styled-components": "^4.3.2",
+    "validatorjs": "^3.15.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
     "precommit": "lint-staged",
     "eslint": "node_modules/.bin/eslint --fix src/"
   },
@@ -38,10 +55,18 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.5.0",
+    "@babel/plugin-proposal-class-properties": "^7.5.0",
+    "@babel/plugin-proposal-decorators": "^7.4.4",
+    "@babel/preset-env": "^7.5.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-plugin-module-resolver": "^3.2.0",
+    "customize-cra": "^0.2.14",
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-prettier": "^3.1.0",
     "husky": "^3.0.0",
     "lint-staged": "^9.0.2",
-    "prettier": "^1.18.2"
+    "prettier": "^1.18.2",
+    "react-app-rewired": "^2.1.3"
   }
 }
