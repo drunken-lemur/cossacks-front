@@ -12,12 +12,22 @@ import { EventRow } from './components';
 const Button = styled(Button_).attrs({ type: 'primary' })``;
 
 const Wrapper = styled.div`
+  ${EventRow} {
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgb(235, 237, 240);
+    
+    + ${EventRow} {
+      margin-top: 16px;    
+    }
+    
+    :last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+  }
+  
   ${Button} {
     margin: 16px 0;
-    
-    + ${Button} {
-      margin-left: 16px;
-    }
   }
 `;
 

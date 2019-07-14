@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Col, Descriptions, Row } from 'antd';
 
 const Wrapper = styled.article``;
 
@@ -40,35 +41,35 @@ class UserCard extends React.PureComponent {
 
     return (
       <Wrapper {...rest}>
-        <div>
-          <strong>Email: </strong>
-          {email}
-        </div>
+        <Row>
+          <Col span={8}>
+            <Descriptions layout="horizontal" size="small" bordered>
+              <Descriptions.Item span={3} label="Avatar">
+                <img src={avatar} alt={email}/>
+              </Descriptions.Item>
 
-        <div>
-          <strong>First name: </strong>
-          {firstName}
-        </div>
+              <Descriptions.Item span={3} label="Email">
+                {email}
+              </Descriptions.Item>
 
-        <div>
-          <strong>Last name: </strong>
-          {lastName}
-        </div>
+              <Descriptions.Item span={3} label="First name">
+                {firstName}
+              </Descriptions.Item>
 
-        <div>
-          <strong>Middle name: </strong>
-          {middleName}
-        </div>
+              <Descriptions.Item span={3} label="Last name">
+                {lastName}
+              </Descriptions.Item>
 
-        <div>
-          <strong>Avatar: </strong>
-          {avatar}
-        </div>
+              <Descriptions.Item span={3} label="Middle name">
+                {middleName}
+              </Descriptions.Item>
 
-        <div>
-          <strong>Phone: </strong>
-          {phone}
-        </div>
+              <Descriptions.Item span={3} label="Phone">
+                {phone}
+              </Descriptions.Item>
+            </Descriptions>
+          </Col>
+        </Row>
       </Wrapper>
     );
   }

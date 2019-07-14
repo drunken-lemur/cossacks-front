@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { getParams, history } from 'utils';
 import { withRouter } from 'react-router-dom';
 import { observer, Provider } from 'mobx-react';
-import { Button as Button_, Typography } from 'antd';
+import { Button as Button_, PageHeader } from 'antd';
 
 import { EventsStore } from 'stores';
 import EventFormState from 'stores/forms/events/EventForm';
@@ -16,7 +16,7 @@ const Button = styled(Button_).attrs({ type: 'primary' })``;
 
 const Wrapper = styled.div`
   ${Button} {
-    margin: 16px 0;
+    margin-top: 16px;
     
     + ${Button} {
       margin-left: 16px;
@@ -82,14 +82,16 @@ class EventEdit extends React.Component {
     return (
       <Provider eventsForm={eventsForm}>
         <Wrapper {...rest}>
-          <Typography.Title>Edit Event</Typography.Title>
+          <PageHeader
+            onBack={history.goBack}
+            title="Events"
+            subTitle="Edit Event"
+          />
 
           <Loader store={eventsStore}>
             <EventForm/>
 
             <Button onClick={onSubmit}>Save</Button>
-
-            <Button onClick={onClose}>Close</Button>
           </Loader>
         </Wrapper>
       </Provider>

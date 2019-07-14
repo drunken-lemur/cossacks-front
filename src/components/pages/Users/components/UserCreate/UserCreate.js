@@ -3,7 +3,7 @@ import { history } from 'utils';
 import { Loader } from 'molecules';
 import styled from 'styled-components';
 import { observer, Provider } from 'mobx-react';
-import { Button as Button_, Typography } from 'antd';
+import { Button as Button_, PageHeader } from 'antd';
 
 import { UsersStore } from 'stores/users';
 import UserFormState from 'stores/forms/users/UserForm';
@@ -60,14 +60,16 @@ class UserCreate extends React.Component {
     return (
       <Provider userForm={userForm}>
         <Wrapper {...rest}>
-          <Typography.Title>Create User</Typography.Title>
+          <PageHeader
+            onBack={history.goBack}
+            title="Users"
+            subTitle="Create new User"
+          />
 
           <Loader store={usersStore}>
             <UserForm onSubmit={onSubmit}/>
 
             <Button onClick={onSubmit}>Create</Button>
-
-            <Button onClick={onClose}>Close</Button>
           </Loader>
         </Wrapper>
       </Provider>

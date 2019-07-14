@@ -4,7 +4,7 @@ import { Loader } from 'molecules';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { observer, Provider } from 'mobx-react';
-import { Button as Button_, Typography } from 'antd';
+import { Button as Button_, PageHeader } from 'antd';
 
 import { EventsStore } from 'stores';
 import EventFormState from 'stores/forms/events/EventForm';
@@ -15,7 +15,7 @@ const Button = styled(Button_).attrs({ type: 'primary' })``;
 
 const Wrapper = styled.div`
   ${Button} {
-    margin: 16px 0;
+    margin-top: 16px;
     
     + ${Button} {
       margin-left: 16px;
@@ -71,14 +71,16 @@ class EventCreate extends React.Component {
     return (
       <Provider eventsForm={eventsForm}>
         <Wrapper {...rest}>
-          <Typography.Title>Create Event</Typography.Title>
+          <PageHeader
+            onBack={history.goBack}
+            title="Events"
+            subTitle="Create Event"
+          />
 
           <Loader store={eventsStore}>
             <EventForm onSubmit={onSubmit}/>
 
             <Button onClick={onSubmit}>Create</Button>
-
-            <Button onClick={onClose}>Close</Button>
           </Loader>
         </Wrapper>
       </Provider>

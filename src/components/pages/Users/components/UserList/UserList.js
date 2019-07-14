@@ -12,12 +12,22 @@ import { UserRow } from './components';
 const Button = styled(Button_).attrs({ type: 'primary' })``;
 
 const Wrapper = styled.div`
+  ${UserRow} {
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgb(235, 237, 240);
+    
+    + ${UserRow} {
+      margin-top: 16px;    
+    }
+    
+    :last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+  }
+  
   ${Button} {
     margin: 16px 0;
-    
-    + ${Button} {
-      margin-left: 16px;
-    }
   }
 `;
 
@@ -65,7 +75,6 @@ class UserList extends React.Component {
     const { usersStore, onCreate, onView, onEdit, onDelete } = this;
 
     const users = usersStore.list.toJSON();
-
 
     return (
       <Provider>

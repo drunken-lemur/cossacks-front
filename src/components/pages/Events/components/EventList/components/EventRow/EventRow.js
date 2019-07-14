@@ -9,7 +9,7 @@ const Button = styled(Button_).attrs({ type: 'primary' })``;
 
 const Wrapper = styled.div`
   ${Button} {
-    margin: 16px 0;
+    margin-top: 16px;
     
     + ${Button} {
       margin-left: 16px;

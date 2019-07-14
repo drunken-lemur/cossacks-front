@@ -9,7 +9,7 @@ const Button = styled(Button_).attrs({ type: 'primary' })``;
 
 const Wrapper = styled.div`
   ${Button} {
-    margin: 16px 0;
+    margin-top: 16px;
     
     + ${Button} {
       margin-left: 16px;
@@ -65,6 +65,10 @@ class UserRow extends React.Component {
       <Wrapper {...rest}>
         <div>
           <div>
+            <img src={avatar} alt={email}/>
+          </div>
+
+          <div>
             <NavLink to={`/users/${_id}`}>
               <strong>Email: </strong>
               {email}
@@ -84,11 +88,6 @@ class UserRow extends React.Component {
           <div>
             <strong>Middle name: </strong>
             {middleName}
-          </div>
-
-          <div>
-            <strong>Avatar: </strong>
-            {avatar}
           </div>
 
           <div>

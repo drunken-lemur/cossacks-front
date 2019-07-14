@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { getParams, history } from 'utils';
 import { withRouter } from 'react-router-dom';
 import { observer, Provider } from 'mobx-react';
-import { Button as Button_, Typography } from 'antd';
+import { Button as Button_, PageHeader } from 'antd';
 
 import { UsersStore } from 'stores/users';
 import UserFormState from 'stores/forms/users/UserForm';
@@ -80,14 +80,16 @@ class UserEdit extends React.Component {
     return (
       <Provider userForm={userForm}>
         <Wrapper {...rest}>
-          <Typography.Title>Edit User</Typography.Title>
+          <PageHeader
+            onBack={history.goBack}
+            title="Users"
+            subTitle="Edit User"
+          />
 
           <Loader store={usersStore}>
             <UserForm/>
 
             <Button onClick={onSubmit}>Save</Button>
-
-            <Button onClick={onClose}>Close</Button>
           </Loader>
         </Wrapper>
       </Provider>

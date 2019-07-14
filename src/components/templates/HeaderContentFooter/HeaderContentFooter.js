@@ -50,6 +50,16 @@ const GlobalStyle = createGlobalStyle`
   #root {
     height: 100%;
   }
+  
+  .ant-spin-nested-loading {
+      padding: 16px;
+      border: 1px solid rgb(235, 237, 240);
+  }
+  
+  .ant-page-header {
+    border: 1px solid rgb(235, 237, 240);
+    border-bottom: none;
+  }
 `;
 
 class HeaderContentFooter extends React.PureComponent {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button as Button_, Typography } from 'antd';
+import { Button as Button_, PageHeader } from 'antd';
 import { Loader } from 'molecules';
 import PropTypes from 'prop-types';
 import { EventsStore } from 'stores';
@@ -50,15 +50,15 @@ class EventView extends React.Component {
     return (
       <Provider>
         <Wrapper {...rest}>
-          <Typography.Title>View Event</Typography.Title>
-
-          <Button onClick={onClose}>Close</Button>
+          <PageHeader
+            onBack={history.goBack}
+            title="Events"
+            subTitle="View Event"
+          />
 
           <Loader store={eventsStore}>
             <EventCard {...eventsStore.data}/>
           </Loader>
-
-          <Button onClick={onClose}>Close</Button>
         </Wrapper>
       </Provider>
     );

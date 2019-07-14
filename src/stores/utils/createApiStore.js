@@ -6,7 +6,7 @@ export const Statuses = {
   error: 'error',
 };
 
-const debug = true;
+const debug = false;
 
 const createApiStore = (model, service = {}, structure = {}) => {
   return types

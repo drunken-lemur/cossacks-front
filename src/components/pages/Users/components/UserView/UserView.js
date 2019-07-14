@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { getParams, history } from 'utils';
 import { withRouter } from 'react-router-dom';
 import { observer, Provider } from 'mobx-react';
-import { Button as Button_, Typography } from 'antd';
+import { Button as Button_, PageHeader } from 'antd';
 
 import { UserCard } from './components';
 
@@ -54,15 +54,15 @@ class UserView extends React.Component {
     return (
       <Provider>
         <Wrapper {...rest}>
-          <Typography.Title>View User</Typography.Title>
-
-          <Button onClick={onClose}>Close</Button>
+          <PageHeader
+            onBack={history.goBack}
+            title="Users"
+            subTitle="View User"
+          />
 
           <Loader store={usersStore}>
             <UserCard {...usersStore.data}/>
           </Loader>
-
-          <Button onClick={onClose}>Close</Button>
         </Wrapper>
       </Provider>
     );
