@@ -1,7 +1,8 @@
+import config from 'config';
 import io from 'socket.io-client';
 import feathers from '@feathersjs/client';
 
-const socket = io('https://shielded-harbor-39840.herokuapp.com');
+const socket = io(config.backedUrl);
 const client = feathers();
 
 client.configure(feathers.socketio(socket));

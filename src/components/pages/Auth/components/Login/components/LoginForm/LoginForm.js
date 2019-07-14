@@ -5,7 +5,7 @@ import { Button, Checkbox, Form, Icon, Input } from 'antd';
 
 const Wrapper = styled(Form)`
   margin: 0 auto;
-  max-width: 300px;
+  max-width: 332px;
   text-align: center;
   
   .login-form-forgot {
