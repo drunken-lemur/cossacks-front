@@ -10,15 +10,17 @@ const Wrapper = styled(Breadcrumb_)``;
 class Breadcrumb extends React.PureComponent {
   static propTypes = {
     className: PropTypes.string,
-    breadcrumbs: PropTypes.shape({
-      label: PropTypes.string,
-      to: PropTypes.string,
-    }),
+    breadcrumbs: PropTypes.arrayOf(
+      PropTypes.shape({
+        label: PropTypes.string,
+        to: PropTypes.string,
+      }),
+    ),
   };
 
   static defaultProps = {
     className: '',
-    breadcrumbs: []
+    breadcrumbs: [],
   };
 
   render() {
@@ -27,9 +29,9 @@ class Breadcrumb extends React.PureComponent {
     return (
       <Wrapper {...rest}>
         <Item>Home</Item>
-        
-        {breadcrumbs.map(breadcrumb => (
-          <Item>{breadcrumb.title}</Item>
+
+        {breadcrumbs.map((breadcrumb, key) => (
+          <Item key={key}>{breadcrumb.title}</Item>
         ))}
       </Wrapper>
     );

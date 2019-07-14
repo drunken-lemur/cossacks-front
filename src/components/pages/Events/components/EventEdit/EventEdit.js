@@ -22,6 +22,8 @@ class EventEdit extends React.Component {
     const data = form.values();
     const { eventsStore, onClose } = this;
 
+    console.log('EventEdit', data);
+
     eventsStore.update(getParams(this).id, data)
       .then(onClose);
   };

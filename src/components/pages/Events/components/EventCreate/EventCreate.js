@@ -25,10 +25,12 @@ class EventCreate extends React.Component {
   };
 
   onSuccess = form => {
-    const values = form.values();
+    const data = form.values();
     const { eventsStore, onClose } = this;
 
-    eventsStore.create(values)
+    console.log('EventCreate', data);
+
+    eventsStore.create(data)
       .then(onClose);
   };
 

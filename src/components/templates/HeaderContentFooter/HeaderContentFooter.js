@@ -58,10 +58,12 @@ class HeaderContentFooter extends React.PureComponent {
     header: PropTypes.node,
     children: PropTypes.node,
     footer: PropTypes.node,
-    breadcrumbs: PropTypes.shape({
-      label: PropTypes.string,
-      to: PropTypes.string,
-    }),
+    breadcrumbs: PropTypes.arrayOf(
+      PropTypes.shape({
+        label: PropTypes.string,
+        to: PropTypes.string,
+      }),
+    ),
   };
 
   static defaultProps = {
