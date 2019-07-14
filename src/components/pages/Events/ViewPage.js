@@ -5,7 +5,7 @@ import { EventView } from './components';
 
 const ViewPage = () => (
   <HeaderContentFooter breadcrumbs={[
-    { title: 'Events' },
+    { title: 'Events', to: '/events' },
     { title: 'View Event' },
   ]}>
     <EventView/>

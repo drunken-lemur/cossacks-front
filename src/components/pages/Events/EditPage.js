@@ -5,7 +5,7 @@ import { EventEdit } from './components';
 
 const EditPage = () => (
   <HeaderContentFooter breadcrumbs={[
-    { title: 'Events' },
+    { title: 'Events', to: '/events' },
     { title: 'Edit' },
   ]}>
     <EventEdit/>

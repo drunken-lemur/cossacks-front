@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Col, Descriptions, Row } from 'antd';
 
 const Wrapper = styled.article``;
 
@@ -12,6 +13,9 @@ class EventCard extends React.PureComponent {
     description: PropTypes.string,
     start: PropTypes.string,
     end: PropTypes.string,
+    user: PropTypes.shape({
+      email: PropTypes.string,
+    }),
   };
 
   static defaultProps = {
@@ -24,25 +28,35 @@ class EventCard extends React.PureComponent {
   };
 
   render() {
-    const { name, description, start, end, ...rest } = this.props;
+    const { name, description, start, end, user, ...rest } = this.props;
 
     return (
       <Wrapper {...rest}>
-        <div>
-          <strong>Name: </strong>
-          {name}
-        </div>
+        <Row>
+          <Col span={8}>
+            <Descriptions layout="horizontal" size="small" bordered>
+              <Descriptions.Item span={3} label="User">
+                {!!user && user.email}
+              </Descriptions.Item>
 
-        <div>
-          <strong>Description: </strong>
-          {description}
-        </div>
+              <Descriptions.Item span={3} label="Name">
+                {name}
+              </Descriptions.Item>
 
-        <div>
-          <strong>Start: </strong>
-          {start} - <strong>End: </strong>
-          {end}
-        </div>
+              <Descriptions.Item span={3} label="Description">
+                {description}
+              </Descriptions.Item>
+
+              <Descriptions.Item span={3} label="Start">
+                {start}
+              </Descriptions.Item>
+
+              <Descriptions.Item span={3} label="End">
+                {end}
+              </Descriptions.Item>
+            </Descriptions>
+          </Col>
+        </Row>
       </Wrapper>
     );
   }

@@ -1,17 +1,26 @@
 import React from 'react';
-import { Button } from 'forms';
 import { history } from 'utils';
-import { Typography } from 'antd';
 import { Loader } from 'molecules';
 import styled from 'styled-components';
 import { observer, Provider } from 'mobx-react';
+import { Button as Button_, Typography } from 'antd';
 
 import { UsersStore } from 'stores/users';
 import UserFormState from 'stores/forms/users/UserForm';
 
 import { UserForm } from '..';
 
-const Wrapper = styled.div``;
+const Button = styled(Button_).attrs({ type: 'primary' })``;
+
+const Wrapper = styled.div`
+  ${Button} {
+    margin: 16px 0;
+    
+    + ${Button} {
+      margin-left: 16px;
+    }
+  }
+`;
 
 @observer
 class UserCreate extends React.Component {

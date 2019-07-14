@@ -5,7 +5,7 @@ import { UserEdit } from './components';
 
 const EditPage = () => (
   <HeaderContentFooter breadcrumbs={[
-    { title: 'Users' },
+    { title: 'Users', to: '/users' },
     { title: 'Edit Event' },
   ]}>
     <UserEdit/>

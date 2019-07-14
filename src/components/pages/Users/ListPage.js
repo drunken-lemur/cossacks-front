@@ -5,7 +5,7 @@ import { UserList } from './components';
 
 const ListPage = () => (
   <HeaderContentFooter breadcrumbs={[
-    { title: 'Users' },
+    { title: 'Users', to: '/users' },
     { title: 'List of Users' },
   ]}>
     <UserList/>

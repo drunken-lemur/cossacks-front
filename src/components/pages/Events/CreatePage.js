@@ -5,7 +5,7 @@ import { EventCreate } from './components';
 
 const CreatePage = () => (
   <HeaderContentFooter breadcrumbs={[
-    { title: 'Events' },
+    { title: 'Events', to: '/events' },
     { title: 'Create Event' },
   ]}>
     <EventCreate/>

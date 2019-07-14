@@ -5,7 +5,7 @@ import { UserCreate } from './components';
 
 const CreatePage = () => (
   <HeaderContentFooter breadcrumbs={[
-    { title: 'Users' },
+    { title: 'Users', to: '/users' },
     { title: 'Create Event' },
   ]}>
     <UserCreate/>

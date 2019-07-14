@@ -1,6 +1,5 @@
 import React from 'react';
-import { Button } from 'forms';
-import { Typography } from 'antd';
+import { Button as Button_, Typography } from 'antd';
 import { Loader } from 'molecules';
 import PropTypes from 'prop-types';
 import { EventsStore } from 'stores';
@@ -11,7 +10,13 @@ import { observer, Provider } from 'mobx-react';
 
 import { EventCard } from './components';
 
-const Wrapper = styled.div``;
+const Button = styled(Button_).attrs({ type: 'primary' })``;
+
+const Wrapper = styled.div`
+  ${Button} {
+    margin: 16px 0;
+  }
+`;
 
 @withRouter
 @observer

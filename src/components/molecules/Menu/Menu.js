@@ -1,4 +1,5 @@
 import React from 'react';
+import * as R from 'ramda';
 import PropTypes from 'prop-types';
 import { Menu as Menu_ } from 'antd';
 import styled from 'styled-components';
@@ -36,24 +37,28 @@ class Menu extends React.PureComponent {
   render() {
     const { authStore, location, items, ...rest } = this.props;
 
+    const props = R.omit(['history', 'match', 'staticContext'], rest);
+
+    const activeKey = `/${location.pathname.split('/')[1]}`;
+
     return (
       <Wrapper
         theme="dark"
         mode="horizontal"
-        activeKey={location.pathname}
-        selectedKeys={location.pathname}
-        {...rest}
+        activeKey={activeKey}
+        selectedKeys={[activeKey]}
+        {...props}
       >
-        {items.map(({ title, to = '', ...rest }) => (
-          <Item key={to || title} {...rest}>
+        {items.map(({ title, to = null }) => (
+          <Item key={to || title}>
             <span>{title}</span>
 
             {!!to && (<Link to={to}/>)}
           </Item>
         ))}
 
-        {authStore.isAuthenticated && (
-          <Item onClick={authStore.logout}>logout</Item>
+        {!!authStore.isAuthenticated && (
+          <Item onClick={authStore.logout}>Logout ({authStore.user.email})</Item>
         )}
       </Wrapper>
     );

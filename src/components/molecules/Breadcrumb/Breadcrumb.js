@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Breadcrumb as Breadcrumb_ } from 'antd';
+import { Link } from 'react-router-dom';
 
 const { Item } = Breadcrumb_;
 
@@ -28,10 +29,20 @@ class Breadcrumb extends React.PureComponent {
 
     return (
       <Wrapper {...rest}>
-        <Item>Home</Item>
+        <Item>
+          <Link to="/">Home</Link>
+        </Item>
 
-        {breadcrumbs.map((breadcrumb, key) => (
-          <Item key={key}>{breadcrumb.title}</Item>
+        {breadcrumbs.map(breadcrumb => (
+          <Item key={breadcrumb.to || breadcrumb.title}>
+            {!!breadcrumb.to ? (
+              <Link to={breadcrumb.to}>
+                {breadcrumb.title}
+              </Link>
+            ) : (
+              <span>{breadcrumb.title}</span>
+            )}
+          </Item>
         ))}
       </Wrapper>
     );

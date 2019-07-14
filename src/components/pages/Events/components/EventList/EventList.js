@@ -1,17 +1,25 @@
 import React from 'react';
-import { Button } from 'forms';
 import { history } from 'utils';
-import { Typography } from 'antd';
 import PropTypes from 'prop-types';
 import { EventsStore } from 'stores';
 import styled from 'styled-components';
 import { List, Loader } from 'molecules';
 import { observer, Provider } from 'mobx-react';
-import { Container } from 'semantic-ui-react';
+import { Button as Button_, Typography } from 'antd';
 
 import { EventRow } from './components';
 
-const Wrapper = styled(Container)``;
+const Button = styled(Button_).attrs({ type: 'primary' })``;
+
+const Wrapper = styled.div`
+  ${Button} {
+    margin: 16px 0;
+    
+    + ${Button} {
+      margin-left: 16px;
+    }
+  }
+`;
 
 @observer
 class EventList extends React.Component {

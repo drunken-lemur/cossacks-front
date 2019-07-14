@@ -1,11 +1,21 @@
 import React from 'react';
 import { noop } from 'utils';
-import { Button } from 'forms';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Button as Button_ } from 'antd';
 import { NavLink } from 'react-router-dom';
 
-const Wrapper = styled.article``;
+const Button = styled(Button_).attrs({ type: 'primary' })``;
+
+const Wrapper = styled.div`
+  ${Button} {
+    margin: 16px 0;
+    
+    + ${Button} {
+      margin-left: 16px;
+    }
+  }
+`;
 
 class UserRow extends React.Component {
   static propTypes = {

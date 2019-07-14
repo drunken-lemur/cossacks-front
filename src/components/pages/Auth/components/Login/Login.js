@@ -1,6 +1,6 @@
 import React from 'react';
 import { pathOr } from 'ramda';
-import {Typography} from 'antd';
+import { Typography } from 'antd';
 import { Loader } from 'molecules';
 import PropTypes from 'prop-types';
 import { UsersStore } from 'stores';

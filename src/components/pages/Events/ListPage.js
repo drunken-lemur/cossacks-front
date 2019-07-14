@@ -5,7 +5,7 @@ import { EventList } from './components';
 
 const ListPage = () => (
   <HeaderContentFooter breadcrumbs={[
-    { title: 'Events' },
+    { title: 'Events', to: '/events' },
     { title: 'List of Events' },
   ]}>
     <EventList/>

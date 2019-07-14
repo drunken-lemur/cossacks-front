@@ -5,7 +5,7 @@ import { UserView } from './components';
 
 const ViewPage = () => (
   <HeaderContentFooter breadcrumbs={[
-    { title: 'Users' },
+    { title: 'Users', to: '/users' },
     { title: 'View Event' },
   ]}>
     <UserView/>

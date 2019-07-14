@@ -1,12 +1,21 @@
 import React from 'react';
 import { noop } from 'utils';
-import { Button } from 'forms';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Button as Button_ } from 'antd';
 import { NavLink } from 'react-router-dom';
-import { Segment } from 'semantic-ui-react';
 
-const Wrapper = styled(Segment)``;
+const Button = styled(Button_).attrs({ type: 'primary' })``;
+
+const Wrapper = styled.div`
+  ${Button} {
+    margin: 16px 0;
+    
+    + ${Button} {
+      margin-left: 16px;
+    }
+  }
+`;
 
 class EventRow extends React.PureComponent {
   static propTypes = {
@@ -14,6 +23,9 @@ class EventRow extends React.PureComponent {
     _id: PropTypes.string,
     name: PropTypes.string,
     description: PropTypes.string,
+    user: PropTypes.shape({
+      email: PropTypes.string,
+    }),
     start: PropTypes.string,
     end: PropTypes.string,
     onView: PropTypes.func,
@@ -40,6 +52,7 @@ class EventRow extends React.PureComponent {
       description,
       start,
       end,
+      user,
       onView,
       onEdit,
       onDelete,
@@ -49,6 +62,11 @@ class EventRow extends React.PureComponent {
     return (
       <Wrapper {...rest}>
         <div>
+          <div>
+            <strong>User: </strong>
+            {user.email}
+          </div>
+
           <div>
             <NavLink to={`/events/${_id}`}>
               <strong>Name: </strong>
