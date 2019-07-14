@@ -4,6 +4,6 @@ import { Default } from 'templates';
 
 import { UserEdit } from './components';
 
-const EditPage = () => <Default header={<Header />} body={<UserEdit />} />;
+const EditPage = () => <Default header={<Header/>} body={<UserEdit/>}/>;
 
 export default EditPage;

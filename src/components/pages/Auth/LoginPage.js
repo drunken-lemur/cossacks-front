@@ -1,9 +1,12 @@
 import React from 'react';
-import { Header } from 'organisms/index';
-import { Default } from 'templates/index';
+import { HeaderContentFooter } from 'templates';
 
 import { Login } from './components';
 
-const LoginPage = () => <Default header={<Header />} body={<Login />} />;
+const LoginPage = () => (
+  <HeaderContentFooter>
+    <Login/>
+  </HeaderContentFooter>
+);
 
 export default LoginPage;

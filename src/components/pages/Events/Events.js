@@ -1,13 +1,7 @@
 import React from 'react';
 import { PageGroup } from 'components/common';
 
-import {
-  CreatePage,
-  EditPage,
-  ListPage,
-  SubscribePage,
-  ViewPage,
-} from './pages';
+import { CreatePage, EditPage, ListPage, SubscribePage, ViewPage } from './pages';
 
 const routes = [
   {
@@ -37,6 +31,6 @@ const routes = [
   },
 ];
 
-const Events = () => <PageGroup routes={routes} />;
+const Events = () => <PageGroup routes={routes}/>;
 
 export default Events;

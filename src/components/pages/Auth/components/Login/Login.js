@@ -1,13 +1,21 @@
 import React from 'react';
-import { reaction } from 'mobx';
+import { pathOr } from 'ramda';
+import { Loader } from 'molecules';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { setDisplayName } from 'recompose';
 import { inject, observer } from 'mobx-react';
 import { MessagesStore, UsersStore } from 'stores';
+import { Redirect, withRouter } from 'react-router';
+
+import { LoginForm } from './components';
 
 import Chat from './chat';
-import { setDisplayName } from 'recompose';
-import { Redirect, withRouter } from 'react-router';
-import { pathOr } from 'ramda';
+
+const Wrapper = styled.div`
+  margin: 0 auto;
+  max-width: 300px;
+`;
 
 @setDisplayName('Login')
 @withRouter
@@ -15,42 +23,38 @@ import { pathOr } from 'ramda';
 @observer
 class Login extends React.Component {
   static propTypes = {
-    authStore: PropTypes.object.isRequired,
+    authStore: PropTypes.object,
   };
 
-  login = () => {
+  onSubmit = (values, type) => {
+    if (type === 'login') {
+      return this.login(values);
+    }
+
+    if (type === 'registration') {
+      return this.registration(values);
+    }
+  };
+
+  login = values => {
     const { authStore } = this.props;
-    const { email, password } = this.state;
+    const { email, password } = values;
 
-    return authStore.login({ email, password });
+    authStore.login({ email, password });
   };
 
-  signup = () => {
-    const { email, password } = this.state;
+  registration = values => {
+    const { usersStore, login } = this;
+    const { email, password } = values;
 
-    this.usersStore.create({ email, password })
-      .then(() => this.login());
+    usersStore.create({ email, password })
+      .then(login);
   };
 
   onLogout = () => {
     const { authStore } = this.props;
 
     authStore.logout();
-  };
-
-  fetchAll = () => {
-    const { messagesStore, usersStore } = this;
-
-    Promise.all([
-      usersStore.find(),
-
-      messagesStore.find({
-        query: {
-          $sort: { createdAt: -1 },
-          $limit: 25,
-        },
-      }),
-    ]);
   };
 
   constructor(props) {
@@ -61,79 +65,36 @@ class Login extends React.Component {
     this.messagesStore = MessagesStore.create();
   }
 
-  updateField(name, ev) {
-    this.setState({ [name]: ev.target.value });
-  }
-
-  componentDidMount() {
-    const { authStore } = this.props;
-
-    this.reactions = [
-      reaction(
-        () => authStore.user,
-        user => user && this.fetchAll(),
-      ),
-    ];
-  }
-
-  componentWillUnmount() {
-    this.reactions.map(reaction => reaction());
-  }
-
   render() {
     const { authStore, location } = this.props;
     const { usersStore, messagesStore } = this;
-    const fromUrl = pathOr('/', ['state', 'from'], location);
+    let fromUrl = pathOr('/', ['state', 'from'], location);
+
+    if (fromUrl.pathname && fromUrl.pathname.startsWith('/auth/login')) {
+      fromUrl = '/';
+    }
 
     if (authStore.isAuthenticated) {
       return <Redirect to={fromUrl}/>;
     }
 
-    if (authStore.isPending) {
+    if (authStore.isAuthenticated) {
       return (
-        <main className="container text-center">
-          <h1>Loading...</h1>
-        </main>
-      );
-    } else if (authStore.isAuthenticated) {
-      return (
-        <div>
-          <Chat onLogout={this.onLogout} messages={messagesStore.list.toJSON()} users={usersStore.list.toJSON()}/>
-        </div>
+        <Chat
+          onLogout={this.onLogout}
+          messages={messagesStore.list.toJSON()}
+          users={usersStore.list.toJSON()}
+        />
       );
     }
 
-    return <main className="login container">
-      <div className="row">
-        <div className="col-12 col-6-tablet push-3-tablet text-center heading">
-          <h1 className="font-100">Log in or signup</h1>
-          <p>{authStore.error && authStore.error.message}</p>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col-12 col-6-tablet push-3-tablet col-4-desktop push-4-desktop">
-          <form className="form">
-            <fieldset>
-              <input className="block" type="email" name="email" placeholder="email"
-                     onChange={ev => this.updateField('email', ev)}/>
-            </fieldset>
-
-            <fieldset>
-              <input className="block" type="password" name="password" placeholder="password"
-                     onChange={ev => this.updateField('password', ev)}/>
-            </fieldset>
-
-            <button type="button" className="button button-primary block signup" onClick={() => this.login()}>
-              Log in
-            </button>
-
-            <button type="button" className="button button-primary block signup" onClick={() => this.signup()}>
-              Signup
-            </button>
-          </form>
-        </div>
-      </div>
-    </main>;
+    return (
+      <Wrapper>
+        <Loader store={authStore}>
+          <LoginForm onSubmit={this.onSubmit}/>
+        </Loader>
+      </Wrapper>
+    );
   }
 }
 

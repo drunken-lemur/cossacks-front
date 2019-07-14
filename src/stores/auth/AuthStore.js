@@ -48,14 +48,15 @@ const AuthStore = types
   }))
   .actions(self => ({
     afterCreate() {
+      const cleanup = () => {
+        self.setStatusPending();
+        self.setStatusDone();
+      };
+
       self
         .login()
-        .then(() => {
-          self.setError(null);
-        })
-        .catch(() => {
-          self.setError(null);
-        });
+        .then(cleanup)
+        .catch(cleanup);
     },
 
     setAccessToken(response) {

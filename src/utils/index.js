@@ -31,8 +31,8 @@ export const useStore = component => ({ useStore, storeMap, ...props }) => {
         }
 
         return props;
-      })
-    )
+      }),
+    ),
   )(component);
 
   return <Component {...props} />;
@@ -44,8 +44,8 @@ export const injectFields = (store, ...fields) => Component => {
     compose(
       inject(store),
       observer,
-      mapProps(R.pickAll(R.flatten(fields)))
-    )
+      mapProps(R.pickAll(R.flatten(fields))),
+    ),
   )(Component);
 };
 
@@ -55,8 +55,8 @@ export const injectMap = (store, propMap) => Component => {
     compose(
       inject(store),
       observer,
-      mapProps(props => ({ ...props, ...propMap(props[store]) }))
-    )
+      mapProps(props => ({ ...props, ...propMap(props[store]) })),
+    ),
   )(Component);
 };
 

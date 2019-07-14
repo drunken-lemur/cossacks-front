@@ -1,40 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
+import { Menu as Menu_ } from 'antd';
 import styled from 'styled-components';
-import { flexCenter, flexCenterBetween, typography } from 'theme/mixins';
+import { inject, observer } from 'mobx-react';
 
-const Wrapper = styled.div`
-  ${flexCenterBetween()};
-  display: inline-flex;
-  background: #9cb4ca;
+const { Item } = Menu_;
+
+const Wrapper = styled(Menu_)`
+  line-height: 64px;
 `;
 
-const Item = styled(NavLink)`
-  color: #fff;
-  width: 142px;
-  height: 72px;
-  ${flexCenter()};
-  cursor: pointer;
-  text-decoration: none;
-  ${typography(14, 18, 500)};
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.1);
-  }
-
-  &.active {
-    background: rgba(255, 255, 255, 0.15);
-  }
-`;
-
+@inject('authStore')
+@observer
 class Menu extends React.PureComponent {
   static propTypes = {
     className: PropTypes.string,
+    authStore: PropTypes.object,
     items: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string.isRequired,
-      })
+      }),
     ),
   };
 
@@ -44,15 +29,18 @@ class Menu extends React.PureComponent {
   };
 
   render() {
-    const { items, ...rest } = this.props;
+    const { authStore, ...rest } = this.props;
 
     return (
-      <Wrapper {...rest}>
-        {items.map(({ title, isActive, to = '#', ...rest }, key) => (
-          <Item key={key} {...rest} to={to}>
-            {title}
-          </Item>
-        ))}
+      <Wrapper
+        theme="dark"
+        mode="horizontal"
+        {...rest}
+      >
+        <Item key="1">nav 1</Item>
+        <Item key="2">nav 2</Item>
+        <Item key="3">nav 3</Item>
+        <Item onClick={authStore.logout}>logout</Item>
       </Wrapper>
     );
   }

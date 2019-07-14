@@ -26,6 +26,6 @@ const routes = [
   },
 ];
 
-const Users = () => <PageGroup routes={routes} />;
+const Users = () => <PageGroup routes={routes}/>;
 
 export default Users;

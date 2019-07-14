@@ -23,7 +23,7 @@ class Fields extends React.PureComponent {
     return (
       <Wrapper {...rest}>
         {[...fields.keys()].map(field => (
-          <Field field={fields.get(field)} />
+          <Field field={fields.get(field)}/>
         ))}
       </Wrapper>
     );

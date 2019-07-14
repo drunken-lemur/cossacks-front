@@ -4,6 +4,6 @@ import { Default } from 'templates';
 
 import { UserCreate } from './components';
 
-const CreatePage = () => <Default header={<Header />} body={<UserCreate />} />;
+const CreatePage = () => <Default header={<Header/>} body={<UserCreate/>}/>;
 
 export default CreatePage;

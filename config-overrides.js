@@ -38,8 +38,8 @@ module.exports = override(
       new webpack.DefinePlugin({
         'process.env.isDevelopment': JSON.stringify(isDevelopment),
         'process.env.isProduction': JSON.stringify(isProduction),
-      })
+      }),
     );
     return config;
-  }
+  },
 );

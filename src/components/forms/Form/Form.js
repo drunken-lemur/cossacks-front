@@ -54,7 +54,7 @@ class Form extends React.PureComponent {
     const { onSubmit, onReset } = form;
 
     return (
-      <StyledForm {...{ onSubmit, onReset, ...rest }}>
+      <StyledForm {...{ onSubmit, onReset ...rest }}>
         <Provider form={form}>
           <>{children}</>
         </Provider>

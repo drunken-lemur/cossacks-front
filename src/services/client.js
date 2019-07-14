@@ -8,7 +8,7 @@ client.configure(feathers.socketio(socket));
 client.configure(
   feathers.authentication({
     storage: window.localStorage,
-  })
+  }),
 );
 
 export default client;

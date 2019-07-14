@@ -47,7 +47,7 @@ class CreateForm extends BaseState {
         extra,
         output,
       },
-      { hooks }
+      { hooks },
     );
   }
 }

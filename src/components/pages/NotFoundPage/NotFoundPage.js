@@ -1,15 +1,11 @@
 import React from 'react';
-import { Default } from 'templates';
-import styled from 'styled-components';
+import { Typography } from 'antd';
+import { HeaderContentFooter } from 'templates';
 
-const Wrapper = styled.div``;
-
-const body = (
-  <Wrapper>
-    <h1>Page not found</h1>
-  </Wrapper>
+const NotFoundPage = () => (
+  <HeaderContentFooter>
+    <Typography.Title>Page not found</Typography.Title>
+  </HeaderContentFooter>
 );
-
-const NotFoundPage = () => <Default body={body} />;
 
 export default NotFoundPage;
