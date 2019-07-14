@@ -3,6 +3,7 @@ import { Menu } from 'molecules';
 import PropTypes from 'prop-types';
 import { Icon, Layout } from 'antd';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const Logo = styled(Icon).attrs({
   theme: 'filled',
@@ -42,7 +43,9 @@ class Header extends React.PureComponent {
 
     return (
       <Wrapper {...rest}>
-        <Logo/>
+        <Link to="/">
+          <Logo/>
+        </Link>
 
         <Menu/>
       </Wrapper>
