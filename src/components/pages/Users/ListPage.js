@@ -1,9 +1,15 @@
 import React from 'react';
-import { Header } from 'organisms';
-import { Default } from 'templates';
+import { HeaderContentFooter } from 'templates';
 
 import { UserList } from './components';
 
-const ListPage = () => <Default header={<Header/>} body={<UserList/>}/>;
+const ListPage = () => (
+  <HeaderContentFooter breadcrumbs={[
+    { title: 'Users' },
+    { title: 'List of Users' },
+  ]}>
+    <UserList/>
+  </HeaderContentFooter>
+);
 
 export default ListPage;

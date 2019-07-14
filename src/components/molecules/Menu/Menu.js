@@ -37,9 +37,10 @@ class Menu extends React.PureComponent {
         mode="horizontal"
         {...rest}
       >
-        <Item key="1">nav 1</Item>
-        <Item key="2">nav 2</Item>
-        <Item key="3">nav 3</Item>
+        <Item key="events">Events</Item>
+
+        <Item key="users">Users</Item>
+
         <Item onClick={authStore.logout}>logout</Item>
       </Wrapper>
     );

@@ -1,8 +1,9 @@
 import React from 'react';
 import { Button } from 'forms';
 import { history } from 'utils';
-import { UsersStore } from 'stores';
+import { Typography } from 'antd';
 import PropTypes from 'prop-types';
+import { UsersStore } from 'stores';
 import styled from 'styled-components';
 import { List, Loader } from 'molecules';
 import { observer, Provider } from 'mobx-react';
@@ -60,7 +61,7 @@ class UserList extends React.Component {
     return (
       <Provider>
         <Wrapper {...rest}>
-          <div>UserList</div>
+          <Typography.Title>List of Users</Typography.Title>
 
           <Button onClick={onCreate}>Create</Button>
 

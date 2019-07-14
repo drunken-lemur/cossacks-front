@@ -1,9 +1,15 @@
 import React from 'react';
-import { Header } from 'organisms';
-import { Default } from 'templates';
+import { HeaderContentFooter } from 'templates';
 
 import { EventView } from './components';
 
-const ViewPage = () => <Default header={<Header/>} body={<EventView/>}/>;
+const ViewPage = () => (
+  <HeaderContentFooter breadcrumbs={[
+    { title: 'Events' },
+    { title: 'View Event' },
+  ]}>
+    <EventView/>
+  </HeaderContentFooter>
+);
 
 export default ViewPage;

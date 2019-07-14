@@ -4,7 +4,10 @@ import { HeaderContentFooter } from 'templates';
 import { Registration } from './components';
 
 const RegistrationPage = () => (
-  <HeaderContentFooter>
+  <HeaderContentFooter breadcrumbs={[
+    { title: 'Auth' },
+    { title: 'Registration' },
+  ]}>
     <Registration/>
   </HeaderContentFooter>
 );

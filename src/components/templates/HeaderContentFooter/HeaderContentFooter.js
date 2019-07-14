@@ -2,33 +2,53 @@ import React from 'react';
 import { Layout } from 'antd';
 import PropTypes from 'prop-types';
 import { Header } from 'organisms';
-import styled from 'styled-components';
 import { Breadcrumb, Footer } from 'molecules';
+import styled, { createGlobalStyle } from 'styled-components';
 
 const Content = styled(Layout.Content)``;
 
 const Inner = styled.div``;
 
 const Wrapper = styled(Layout)`
+  --header-height: 64px;
+  --breadcrumb-height: 64px;
+  --footer-height: 64px;
+
   ${Header} {
     z-index: 1;
     width: 100%;
     position: fixed;
+    height: var(--header-height);
   }
 
   ${Breadcrumb} {
-    margin: 16px 0;
+    line-height: var(--breadcrumb-height);
   }
   
   ${Content} {
     padding: 0 48px;
-    margin-top: 64px;
+    overflow: scroll;
+    margin-top: var(--header-height);
+    height: calc(100vh - var(--header-height) - var(--footer-height));
   }
   
   ${Inner} {
     padding: 24px;
     background: #fff;
-    min-height: 380px;
+    min-height: calc(100% - var(--breadcrumb-height));
+  }
+  
+  ${Footer} {
+    line-height: 16px;
+    height: var(--footer-height);
+  }
+`;
+
+const GlobalStyle = createGlobalStyle`
+  html, 
+  body,
+  #root {
+    height: 100%;
   }
 `;
 
@@ -38,6 +58,10 @@ class HeaderContentFooter extends React.PureComponent {
     header: PropTypes.node,
     children: PropTypes.node,
     footer: PropTypes.node,
+    breadcrumbs: PropTypes.shape({
+      label: PropTypes.string,
+      to: PropTypes.string,
+    }),
   };
 
   static defaultProps = {
@@ -45,23 +69,29 @@ class HeaderContentFooter extends React.PureComponent {
     header: <Header/>,
     children: null,
     footer: <Footer/>,
+    breadcrumbs: [],
   };
 
   render() {
-    const { header, children, footer, ...rest } = this.props;
+    const { header, children, footer, breadcrumbs, ...rest } = this.props;
 
     return (
-      <Wrapper {...rest}>
-        {header}
+      <>
+        <GlobalStyle/>
 
-        <Content>
-          <Breadcrumb/>
+        <Wrapper {...rest}>
 
-          <Inner>{children}</Inner>
-        </Content>
+          {header}
 
-        {footer}
-      </Wrapper>
+          <Content>
+            <Breadcrumb breadcrumbs={breadcrumbs}/>
+
+            <Inner>{children}</Inner>
+          </Content>
+
+          {footer}
+        </Wrapper>
+      </>
     );
   }
 }

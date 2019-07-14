@@ -7,7 +7,7 @@ import { Auth, Events, NotFoundPage, Users } from 'pages';
 const routes = [{
   path: '/',
   exact: true,
-  component: () => <Redirect exact from='/' to='/users'/>,
+  component: () => <Redirect exact from='/' to='/events'/>,
 }, {
   path: '/auth',
   component: Auth,

@@ -37,18 +37,6 @@ class Header extends React.PureComponent {
     className: '',
   };
 
-  // noinspection JSUnusedGlobalSymbols
-  items = [
-    {
-      to: '/users',
-      title: 'Users',
-    },
-    {
-      to: '/events',
-      title: 'Events',
-    },
-  ];
-
   render() {
     const { ...rest } = this.props;
 

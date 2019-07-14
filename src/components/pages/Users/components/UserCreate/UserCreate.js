@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from 'forms';
 import { history } from 'utils';
+import { Typography } from 'antd';
 import { Loader } from 'molecules';
 import styled from 'styled-components';
 import { observer, Provider } from 'mobx-react';
@@ -50,7 +51,7 @@ class UserCreate extends React.Component {
     return (
       <Provider userForm={userForm}>
         <Wrapper {...rest}>
-          <div>UserCreate</div>
+          <Typography.Title>Create User</Typography.Title>
 
           <Loader store={usersStore}>
             <UserForm onSubmit={onSubmit}/>

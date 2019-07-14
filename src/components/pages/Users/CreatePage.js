@@ -1,9 +1,15 @@
 import React from 'react';
-import { Header } from 'organisms';
-import { Default } from 'templates';
+import { HeaderContentFooter } from 'templates';
 
 import { UserCreate } from './components';
 
-const CreatePage = () => <Default header={<Header/>} body={<UserCreate/>}/>;
+const CreatePage = () => (
+  <HeaderContentFooter breadcrumbs={[
+    { title: 'Users' },
+    { title: 'Create Event' },
+  ]}>
+    <UserCreate/>
+  </HeaderContentFooter>
+);
 
 export default CreatePage;

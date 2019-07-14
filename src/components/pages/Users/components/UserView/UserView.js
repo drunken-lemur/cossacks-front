@@ -1,8 +1,9 @@
 import React from 'react';
 import { Button } from 'forms';
+import { Typography } from 'antd';
 import { Loader } from 'molecules';
-import { UsersStore } from 'stores';
 import PropTypes from 'prop-types';
+import { UsersStore } from 'stores';
 import styled from 'styled-components';
 import { getParams, history } from 'utils';
 import { withRouter } from 'react-router-dom';
@@ -44,7 +45,7 @@ class UserView extends React.Component {
     return (
       <Provider>
         <Wrapper {...rest}>
-          <div>UserView</div>
+          <Typography.Title>View User</Typography.Title>
 
           <Button onClick={onClose}>Close</Button>
 

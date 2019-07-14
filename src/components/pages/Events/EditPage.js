@@ -1,9 +1,15 @@
 import React from 'react';
-import { Header } from 'organisms';
-import { Default } from 'templates';
+import { HeaderContentFooter } from 'templates';
 
 import { EventEdit } from './components';
 
-const EditPage = () => <Default header={<Header/>} body={<EventEdit/>}/>;
+const EditPage = () => (
+  <HeaderContentFooter breadcrumbs={[
+    { title: 'Events' },
+    { title: 'Edit' },
+  ]}>
+    <EventEdit/>
+  </HeaderContentFooter>
+);
 
 export default EditPage;

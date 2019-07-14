@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from 'forms';
 import { reaction } from 'mobx';
+import { Typography } from 'antd';
 import { Loader } from 'molecules';
 import styled from 'styled-components';
 import { getParams, history } from 'utils';
@@ -70,7 +71,7 @@ class UserEdit extends React.Component {
     return (
       <Provider userForm={userForm}>
         <Wrapper {...rest}>
-          <div>UserEdit</div>
+          <Typography.Title>Edit User</Typography.Title>
 
           <Loader store={usersStore}>
             <UserForm/>

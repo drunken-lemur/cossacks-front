@@ -1,12 +1,13 @@
 import React from 'react';
 import { Button } from 'forms';
 import { history } from 'utils';
+import { Typography } from 'antd';
 import PropTypes from 'prop-types';
 import { EventsStore } from 'stores';
 import styled from 'styled-components';
 import { List, Loader } from 'molecules';
 import { observer, Provider } from 'mobx-react';
-import { Container, Header } from 'semantic-ui-react';
+import { Container } from 'semantic-ui-react';
 
 import { EventRow } from './components';
 
@@ -61,7 +62,7 @@ class EventList extends React.Component {
       <Wrapper {...rest}>
         <Provider>
           <>
-            <Header as="h1">EventsList</Header>
+            <Typography.Title>List of Events</Typography.Title>
 
             <Button onClick={onCreate}>Create</Button>
 

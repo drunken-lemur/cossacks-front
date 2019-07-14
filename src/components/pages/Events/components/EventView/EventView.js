@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from 'forms';
+import { Typography } from 'antd';
 import { Loader } from 'molecules';
 import PropTypes from 'prop-types';
 import { EventsStore } from 'stores';
@@ -44,7 +45,7 @@ class EventView extends React.Component {
     return (
       <Provider>
         <Wrapper {...rest}>
-          <div>EventView</div>
+          <Typography.Title>View Event</Typography.Title>
 
           <Button onClick={onClose}>Close</Button>
 

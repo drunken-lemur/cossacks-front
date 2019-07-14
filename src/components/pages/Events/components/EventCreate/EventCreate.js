@@ -1,10 +1,10 @@
 import React from 'react';
 import { Button } from 'forms';
 import { history } from 'utils';
+import { Typography } from 'antd';
 import { Loader } from 'molecules';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Header } from 'semantic-ui-react';
 import { observer, Provider } from 'mobx-react';
 
 import { EventsStore } from 'stores';
@@ -60,7 +60,7 @@ class EventCreate extends React.Component {
     return (
       <Provider eventsForm={eventsForm}>
         <Wrapper {...rest}>
-          <Header as="h1">EventCreate</Header>
+          <Typography.Title>Create Event</Typography.Title>
 
           <Loader store={eventsStore}>
             <EventForm onSubmit={onSubmit}/>

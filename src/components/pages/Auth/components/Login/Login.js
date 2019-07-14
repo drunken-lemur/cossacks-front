@@ -1,16 +1,15 @@
 import React from 'react';
 import { pathOr } from 'ramda';
+import {Typography} from 'antd';
 import { Loader } from 'molecules';
 import PropTypes from 'prop-types';
+import { UsersStore } from 'stores';
 import styled from 'styled-components';
 import { setDisplayName } from 'recompose';
 import { inject, observer } from 'mobx-react';
-import { MessagesStore, UsersStore } from 'stores';
 import { Redirect, withRouter } from 'react-router';
 
 import { LoginForm } from './components';
-
-import Chat from './chat';
 
 const Wrapper = styled.div`
   margin: 0 auto;
@@ -51,23 +50,15 @@ class Login extends React.Component {
       .then(login);
   };
 
-  onLogout = () => {
-    const { authStore } = this.props;
-
-    authStore.logout();
-  };
-
   constructor(props) {
     super(props);
 
-    this.state = {};
     this.usersStore = UsersStore.create();
-    this.messagesStore = MessagesStore.create();
   }
 
   render() {
+    const { usersStore } = this;
     const { authStore, location } = this.props;
-    const { usersStore, messagesStore } = this;
     let fromUrl = pathOr('/', ['state', 'from'], location);
 
     if (fromUrl.pathname && fromUrl.pathname.startsWith('/auth/login')) {
@@ -78,20 +69,16 @@ class Login extends React.Component {
       return <Redirect to={fromUrl}/>;
     }
 
-    if (authStore.isAuthenticated) {
-      return (
-        <Chat
-          onLogout={this.onLogout}
-          messages={messagesStore.list.toJSON()}
-          users={usersStore.list.toJSON()}
-        />
-      );
-    }
-
     return (
       <Wrapper>
+        <Typography.Title>
+          Login
+        </Typography.Title>
+
         <Loader store={authStore}>
-          <LoginForm onSubmit={this.onSubmit}/>
+          <Loader store={usersStore}>
+            <LoginForm onSubmit={this.onSubmit}/>
+          </Loader>
         </Loader>
       </Wrapper>
     );

@@ -78,7 +78,7 @@ class LoginForm extends React.PureComponent {
             initialValue: true,
           })(<Checkbox className="login-form-remember">Remember me</Checkbox>)}
 
-          <a className="login-form-forgot" href="">
+          <a className="login-form-forgot" href="#">
             Forgot password
           </a>
 
@@ -89,7 +89,7 @@ class LoginForm extends React.PureComponent {
             Log in
           </Button>
 
-          Or <a href="" onClick={this.onSubmit('registration')}>register now!</a>
+          Or <a href="#" onClick={this.onSubmit('registration')}>register now!</a>
         </Form.Item>
       </Wrapper>
     );
