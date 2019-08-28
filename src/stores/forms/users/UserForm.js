@@ -8,6 +8,7 @@ const fields = [
   'middleName',
   'avatar',
   'phone',
+  'permissions',
 ];
 
 const placeholders = {
@@ -18,6 +19,7 @@ const placeholders = {
   middleName: 'middleName',
   avatar: 'avatar',
   phone: 'phone',
+  permissions: 'Permissions',
 };
 const labels = {
   email: 'Email',
@@ -27,15 +29,21 @@ const labels = {
   middleName: 'Middle name',
   avatar: 'Avatar',
   phone: 'Phone',
+  permissions: 'Permissions',
 };
 const extra = {};
 const rules = {};
 const types = {};
 const values = {};
-const output = {};
+const output = {
+  permissions: value => {
+    return `${value}`.split(',').map(p => p.trim());
+  },
+};
 
 class CreateForm extends BaseState {
   constructor(hooks) {
+    // noinspection JSCheckFunctionSignatures
     super(
       {
         fields,
@@ -47,7 +55,7 @@ class CreateForm extends BaseState {
         extra,
         output,
       },
-      { hooks },
+      { hooks }
     );
   }
 }

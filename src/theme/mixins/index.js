@@ -4,7 +4,7 @@ export const typography = (
   size,
   height,
   weight = 400,
-  important = false,
+  important = false
 ) => css`
   font-size: ${size}px ${important && ' !important'};
   font-weight: ${weight} ${important && ' !important'};
@@ -16,7 +16,7 @@ export const transition = (
   property = 'all',
   timing = '.2s',
   easing = 'ease-in-out',
-  delay = '',
+  delay = ''
 ) => css`
   transition: ${property} ${timing} ${easing} ${delay};
 `;
@@ -36,15 +36,15 @@ export const flexCenterBetween = () => css`
 export const display = (
   display,
   alignItems = null,
-  justifyContent = null,
+  justifyContent = null
 ) => css`
   display: ${display};
   ${alignItems &&
-css`
+    css`
       align-items: ${alignItems};
     `};
   ${justifyContent &&
-css`
+    css`
       justify-content: ${justifyContent};
     `};
 `;

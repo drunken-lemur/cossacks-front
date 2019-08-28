@@ -10,7 +10,7 @@ const phoneChecker = (value, requirement, attribute) => {
 validatorjs.register(
   'phone',
   phoneChecker,
-  'The :attribute phone number is not in the format XXX-XXX-XXXX.',
+  'The :attribute phone number is not in the format XXX-XXX-XXXX.'
 );
 
 // FullName validator
@@ -21,7 +21,7 @@ const fullNameChecker = (value, requirement, attribute) => {
 validatorjs.register(
   'fullName',
   fullNameChecker,
-  'The :attribute is not in the format LastName FirstName MiddleName.',
+  'The :attribute is not in the format LastName FirstName MiddleName.'
 );
 
 class BaseState extends Form {

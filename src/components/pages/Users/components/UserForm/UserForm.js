@@ -24,6 +24,7 @@ class UserForm extends React.Component {
     middleName: Input,
     avatar: Input,
     phone: Input,
+    permissions: Input,
   };
 
   componentDidMount() {

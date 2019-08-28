@@ -55,7 +55,7 @@ class UserCreate extends React.Component {
 
   render() {
     const { ...rest } = this.props;
-    const { userForm, usersStore, onSubmit, onClose } = this;
+    const { userForm, usersStore, onSubmit } = this;
 
     return (
       <Provider userForm={userForm}>

@@ -4,11 +4,13 @@ import { HeaderContentFooter } from 'templates';
 import { EventCreate } from './components';
 
 const CreatePage = () => (
-  <HeaderContentFooter breadcrumbs={[
-    { title: 'Events', to: '/events' },
-    { title: 'Create Event' },
-  ]}>
-    <EventCreate/>
+  <HeaderContentFooter
+    breadcrumbs={[
+      { title: 'Events', to: '/events' },
+      { title: 'Create Event' },
+    ]}
+  >
+    <EventCreate />
   </HeaderContentFooter>
 );
 

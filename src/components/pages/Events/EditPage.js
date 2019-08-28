@@ -4,11 +4,10 @@ import { HeaderContentFooter } from 'templates';
 import { EventEdit } from './components';
 
 const EditPage = () => (
-  <HeaderContentFooter breadcrumbs={[
-    { title: 'Events', to: '/events' },
-    { title: 'Edit' },
-  ]}>
-    <EventEdit/>
+  <HeaderContentFooter
+    breadcrumbs={[{ title: 'Events', to: '/events' }, { title: 'Edit' }]}
+  >
+    <EventEdit />
   </HeaderContentFooter>
 );
 

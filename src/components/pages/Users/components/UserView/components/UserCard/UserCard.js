@@ -36,16 +36,17 @@ class UserCard extends React.PureComponent {
       middleName,
       avatar,
       phone,
+      permissions,
       ...rest
     } = this.props;
 
     return (
       <Wrapper {...rest}>
         <Row>
-          <Col span={8}>
+          <Col>
             <Descriptions layout="horizontal" size="small" bordered>
               <Descriptions.Item span={3} label="Avatar">
-                <img src={avatar} alt={email}/>
+                <img src={avatar} alt={email} />
               </Descriptions.Item>
 
               <Descriptions.Item span={3} label="Email">
@@ -66,6 +67,10 @@ class UserCard extends React.PureComponent {
 
               <Descriptions.Item span={3} label="Phone">
                 {phone}
+              </Descriptions.Item>
+
+              <Descriptions.Item span={3} label="Permissions">
+                {permissions}
               </Descriptions.Item>
             </Descriptions>
           </Col>

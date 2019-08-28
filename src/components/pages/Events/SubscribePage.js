@@ -5,7 +5,7 @@ import { Default } from 'templates';
 import { EventSubscribe } from './components';
 
 const SubscribePage = () => (
-  <Default header={<Header/>} body={<EventSubscribe/>}/>
+  <Default header={<Header />} body={<EventSubscribe />} />
 );
 
 export default SubscribePage;

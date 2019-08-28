@@ -10,7 +10,7 @@ const Button = styled(Button_).attrs({ type: 'primary' })``;
 const Wrapper = styled.div`
   ${Button} {
     margin-top: 16px;
-    
+
     + ${Button} {
       margin-left: 16px;
     }
@@ -55,6 +55,7 @@ class UserRow extends React.Component {
       middleName,
       avatar,
       phone,
+      permissions,
       onView,
       onEdit,
       onDelete,
@@ -64,9 +65,11 @@ class UserRow extends React.Component {
     return (
       <Wrapper {...rest}>
         <div>
-          <div>
-            <img src={avatar} alt={email}/>
-          </div>
+          {!!avatar && (
+            <div>
+              <img src={avatar} alt={email} />
+            </div>
+          )}
 
           <div>
             <NavLink to={`/users/${_id}`}>
@@ -75,25 +78,26 @@ class UserRow extends React.Component {
             </NavLink>
           </div>
 
-          <div>
-            <strong>First name: </strong>
-            {firstName}
-          </div>
+          {!!firstName && (
+            <div>
+              <strong>First name: </strong>
+              {firstName}
+            </div>
+          )}
 
-          <div>
-            <strong>Last name: </strong>
-            {lastName}
-          </div>
+          {!!lastName && (
+            <div>
+              <strong>Last name: </strong>
+              {lastName}
+            </div>
+          )}
 
-          <div>
-            <strong>Middle name: </strong>
-            {middleName}
-          </div>
-
-          <div>
-            <strong>Phone: </strong>
-            {phone}
-          </div>
+          {!!permissions && !!permissions.length && (
+            <div>
+              <strong>Permissions: </strong>
+              {permissions.join(', ')}
+            </div>
+          )}
         </div>
 
         <Button onClick={onView(_id)}>View</Button>

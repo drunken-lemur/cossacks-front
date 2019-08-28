@@ -39,7 +39,7 @@ class EventForm extends BaseState {
         extra,
         output,
       },
-      { hooks },
+      { hooks }
     );
   }
 

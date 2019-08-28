@@ -1,9 +1,9 @@
 import React from 'react';
 import * as R from 'ramda';
 import PropTypes from 'prop-types';
+import { Alert, Spin } from 'antd';
 import { observer } from 'mobx-react';
 import styled from 'styled-components';
-import { Spin, Typography } from 'antd';
 
 const Wrapper = styled(Spin)``;
 
@@ -23,9 +23,10 @@ class Loader extends React.Component {
     const message = R.pathOr(null, ['error', 'message'], store);
 
     return (
-      <Typography.Text type="danger">
-        {message || 'Error... Something went wrong.....'}
-      </Typography.Text>
+      <Alert
+        type="error"
+        message={message || 'Error... Something went wrong.....'}
+      />
     );
   };
 
@@ -33,12 +34,13 @@ class Loader extends React.Component {
     const { store, children, ...rest } = this.props;
 
     return (
-      <Wrapper {...rest} spinning={store.isPending}>
-        <>
-          {this.getErrors()}
+      <>
+        {this.getErrors()}
+
+        <Wrapper {...rest} spinning={store.isPending}>
           {children}
-        </>
-      </Wrapper>
+        </Wrapper>
+      </>
     );
   }
 }

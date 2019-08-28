@@ -9,6 +9,7 @@ const User = types.model('User', {
   middleName: types.optional(types.string, ''),
   avatar: types.optional(types.string, ''),
   phone: types.optional(types.string, ''),
+  permissions: types.optional(types.array(types.string), []),
 });
 
 export default User;

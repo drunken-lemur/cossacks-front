@@ -33,7 +33,7 @@ class EventCard extends React.PureComponent {
     return (
       <Wrapper {...rest}>
         <Row>
-          <Col span={8}>
+          <Col>
             <Descriptions layout="horizontal" size="small" bordered>
               <Descriptions.Item span={3} label="User">
                 {!!user && user.email}

@@ -49,7 +49,7 @@ class UserView extends React.Component {
 
   render() {
     const { ...rest } = this.props;
-    const { usersStore, onClose } = this;
+    const { usersStore } = this;
 
     return (
       <Provider>

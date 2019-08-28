@@ -45,7 +45,7 @@ class EventView extends React.Component {
 
   render() {
     const { ...rest } = this.props;
-    const { eventsStore, onClose } = this;
+    const { eventsStore } = this;
 
     return (
       <Provider>

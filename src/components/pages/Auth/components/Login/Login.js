@@ -13,7 +13,7 @@ import { LoginForm } from './components';
 
 const Wrapper = styled.div`
   margin: 0 auto;
-  max-width: 300px;
+  max-width: 332px;
 `;
 
 @setDisplayName('Login')

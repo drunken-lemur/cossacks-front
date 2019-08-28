@@ -66,7 +66,7 @@ class EventCreate extends React.Component {
 
   render() {
     const { ...rest } = this.props;
-    const { eventsForm, eventsStore, onSubmit, onClose } = this;
+    const { eventsForm, eventsStore, onSubmit } = this;
 
     return (
       <Provider eventsForm={eventsForm}>

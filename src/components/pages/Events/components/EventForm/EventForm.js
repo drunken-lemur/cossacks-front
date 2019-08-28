@@ -14,6 +14,7 @@ class EventForm extends React.Component {
 
   static defaultProps = {
     className: '',
+
   };
 
   fields = {
