@@ -1,1 +1,1 @@
-export { default } from './CustomRoute';
+export {default} from './CustomRoute';

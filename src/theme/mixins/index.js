@@ -1,10 +1,10 @@
-import { css } from 'styled-components';
+import {css} from 'styled-components';
 
 export const typography = (
-  size,
-  height,
-  weight = 400,
-  important = false
+    size,
+    height,
+    weight = 400,
+    important = false
 ) => css`
   font-size: ${size}px ${important && ' !important'};
   font-weight: ${weight} ${important && ' !important'};
@@ -13,10 +13,10 @@ export const typography = (
 `;
 
 export const transition = (
-  property = 'all',
-  timing = '.2s',
-  easing = 'ease-in-out',
-  delay = ''
+    property = 'all',
+    timing = '.2s',
+    easing = 'ease-in-out',
+    delay = ''
 ) => css`
   transition: ${property} ${timing} ${easing} ${delay};
 `;
@@ -34,17 +34,17 @@ export const flexCenterBetween = () => css`
 `;
 
 export const display = (
-  display,
-  alignItems = null,
-  justifyContent = null
+    display,
+    alignItems = null,
+    justifyContent = null
 ) => css`
   display: ${display};
   ${alignItems &&
-    css`
+css`
       align-items: ${alignItems};
     `};
   ${justifyContent &&
-    css`
+css`
       justify-content: ${justifyContent};
     `};
 `;

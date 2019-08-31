@@ -1,1 +1,1 @@
-export { default as UserRow } from './UserRow';
+export {default as UserRow} from './UserRow';

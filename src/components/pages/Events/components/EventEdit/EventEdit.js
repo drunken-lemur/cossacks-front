@@ -1,18 +1,18 @@
 import React from 'react';
-import { reaction } from 'mobx';
-import { Loader } from 'molecules';
+import {reaction} from 'mobx';
+import {Loader} from 'molecules';
 import styled from 'styled-components';
-import { getParams, history } from 'utils';
-import { withRouter } from 'react-router-dom';
-import { observer, Provider } from 'mobx-react';
-import { Button as Button_, PageHeader } from 'antd';
+import {getParams, history} from 'utils';
+import {withRouter} from 'react-router-dom';
+import {observer, Provider} from 'mobx-react';
+import {Button as Button_, PageHeader} from 'antd';
 
-import { EventsStore } from 'stores';
+import {EventsStore} from 'stores';
 import EventFormState from 'stores/forms/events/EventForm';
 
-import { EventForm } from '..';
+import {EventForm} from '..';
 
-const Button = styled(Button_).attrs({ type: 'primary' })``;
+const Button = styled(Button_).attrs({type: 'primary'})``;
 
 const Wrapper = styled.div`
   ${Button} {
@@ -27,76 +27,76 @@ const Wrapper = styled.div`
 @withRouter
 @observer
 class EventEdit extends React.Component {
-  onSuccess = form => {
-    const data = form.values();
-    const { eventsStore, onClose } = this;
+    constructor(props) {
+        super(props);
 
-    console.log('EventEdit', data);
+        const {onSuccess, onError} = this;
+        this.eventsForm = new EventFormState({onSuccess, onError});
 
-    eventsStore.update(getParams(this).id, data)
-      .then(onClose);
-  };
+        this.eventsStore = EventsStore.create();
+    }
 
-  onClose = () => {
-    history.push('/events');
-  };
+    onSuccess = form => {
+        const data = form.values();
+        const {eventsStore, onClose} = this;
 
-  onError = form => {
-    console.log('onError', { form });
-  };
+        console.log('EventEdit', data);
 
-  onSubmit = () => {
-    this.eventsForm.submit();
-  };
+        eventsStore.update(getParams(this).id, data)
+            .then(onClose);
+    };
 
-  constructor(props) {
-    super(props);
+    onClose = () => {
+        history.push('/events');
+    };
 
-    const { onSuccess, onError } = this;
-    this.eventsForm = new EventFormState({ onSuccess, onError });
+    onError = form => {
+        console.log('onError', {form});
+    };
 
-    this.eventsStore = EventsStore.create();
-  }
+    onSubmit = () => {
+        this.eventsForm.submit();
+    };
 
-  componentDidMount() {
-    const { eventsStore, eventsForm } = this;
+    componentDidMount() {
+        const {eventsStore, eventsForm} = this;
 
-    this.reactions = [
-      reaction(
-        () => eventsStore.data,
-        event => eventsForm.set('value', event.toJSON()),
-      ),
-    ];
+        this.reactions = [
+            reaction(
+                () => eventsStore.data,
+                event => eventsForm.set('value', event.toJSON()),
+            ),
+        ];
 
-    eventsStore.get(getParams(this).id);
-  }
+        eventsStore.get(getParams(this).id);
+    }
 
-  componentWillUnmount() {
-    this.reactions.map(reaction => reaction());
-  }
+    componentWillUnmount() {
+        this.reactions.map(reaction => reaction());
+    }
 
-  render() {
-    const { ...rest } = this.props;
-    const { eventsForm, eventsStore, onSubmit } = this;
+    render() {
+        const {...rest} = this.props;
+        const {eventsForm, eventsStore, onSubmit} = this;
 
-    return (
-      <Provider eventsForm={eventsForm}>
-        <Wrapper {...rest}>
-          <PageHeader
-            onBack={history.goBack}
-            title="Events"
-            subTitle="Edit Event"
-          />
+        return (
+            <Provider eventsForm={eventsForm}>
+                <Wrapper {...rest}>
+                    <PageHeader
+                        onBack={history.goBack}
+                        title="Events"
+                        subTitle="Edit Event"
+                    />
 
-          <Loader store={eventsStore}>
-            <EventForm/>
+                    <Loader store={eventsStore}>
+                        <EventForm/>
 
-            <Button onClick={onSubmit}>Save</Button>
-          </Loader>
-        </Wrapper>
-      </Provider>
-    );
-  }
+                        <Button onClick={onSubmit}>Save</Button>
+                    </Loader>
+                </Wrapper>
+            </Provider>
+        );
+    }
 }
 
 export default styled(EventEdit)``;

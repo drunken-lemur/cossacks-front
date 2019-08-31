@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Button, Checkbox, Form, Icon, Input } from 'antd';
+import {Button, Checkbox, Form, Icon, Input} from 'antd';
 
 const Wrapper = styled(Form)`
   margin: 0 auto;
@@ -19,81 +19,81 @@ const Wrapper = styled(Form)`
   }
 `;
 
-@Form.create({ name: 'normal_login' })
+@Form.create({name: 'normal_login'})
 class LoginForm extends React.PureComponent {
-  static propTypes = {
-    className: PropTypes.string,
-    onSubmit: PropTypes.func,
-  };
+    static propTypes = {
+        className: PropTypes.string,
+        onSubmit: PropTypes.func,
+    };
 
-  static defaultProps = {
-    className: '',
-    onSubmit: () => null,
-  };
+    static defaultProps = {
+        className: '',
+        onSubmit: () => null,
+    };
 
-  onSubmit = type => e => {
-    e.preventDefault();
+    onSubmit = type => e => {
+        e.preventDefault();
 
-    const { form, onSubmit } = this.props;
+        const {form, onSubmit} = this.props;
 
-    form.validateFields((err, values) => {
-      if (!err) {
-        onSubmit(values, type);
-      }
-    });
-  };
+        form.validateFields((err, values) => {
+            if (!err) {
+                onSubmit(values, type);
+            }
+        });
+    };
 
-  render() {
-    const { ...rest } = this.props;
-    const { getFieldDecorator } = this.props.form;
+    render() {
+        const {...rest} = this.props;
+        const {getFieldDecorator} = this.props.form;
 
-    return (
-      <Wrapper {...rest} onSubmit={this.onSubmit('login')}>
-        <Form.Item>
-          {getFieldDecorator('email', {
-            rules: [{ required: true, message: 'Please input your email!' }],
-          })(
-            <Input
-              prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }}/>}
-              placeholder="Email"
-            />,
-          )}
-        </Form.Item>
+        return (
+            <Wrapper {...rest} onSubmit={this.onSubmit('login')}>
+                <Form.Item>
+                    {getFieldDecorator('email', {
+                        rules: [{required: true, message: 'Please input your email!'}],
+                    })(
+                        <Input
+                            prefix={<Icon type="user" style={{color: 'rgba(0,0,0,.25)'}}/>}
+                            placeholder="Email"
+                        />,
+                    )}
+                </Form.Item>
 
-        <Form.Item>
-          {getFieldDecorator('password', {
-            rules: [{ required: true, message: 'Please input your Password!' }],
-          })(
-            <Input
-              prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }}/>}
-              type="password"
-              placeholder="Password"
-            />,
-          )}
-        </Form.Item>
+                <Form.Item>
+                    {getFieldDecorator('password', {
+                        rules: [{required: true, message: 'Please input your Password!'}],
+                    })(
+                        <Input
+                            prefix={<Icon type="lock" style={{color: 'rgba(0,0,0,.25)'}}/>}
+                            type="password"
+                            placeholder="Password"
+                        />,
+                    )}
+                </Form.Item>
 
-        <Form.Item>
-          {getFieldDecorator('remember', {
-            valuePropName: 'checked',
-            initialValue: true,
-          })(<Checkbox className="login-form-remember">Remember me</Checkbox>)}
+                <Form.Item>
+                    {getFieldDecorator('remember', {
+                        valuePropName: 'checked',
+                        initialValue: true,
+                    })(<Checkbox className="login-form-remember">Remember me</Checkbox>)}
 
-          <a className="login-form-forgot" href="#">
-            Forgot password
-          </a>
+                    <a className="login-form-forgot" href="#">
+                        Forgot password
+                    </a>
 
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="login-form-button">
-            Log in
-          </Button>
+                    <Button
+                        type="primary"
+                        htmlType="submit"
+                        className="login-form-button">
+                        Log in
+                    </Button>
 
-          Or <a href="#" onClick={this.onSubmit('registration')}>register now!</a>
-        </Form.Item>
-      </Wrapper>
-    );
-  }
+                    Or <a href="#" onClick={this.onSubmit('registration')}>register now!</a>
+                </Form.Item>
+            </Wrapper>
+        );
+    }
 }
 
 export default styled(LoginForm)``;

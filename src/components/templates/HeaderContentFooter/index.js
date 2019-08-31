@@ -1,1 +1,1 @@
-export { default } from './HeaderContentFooter';
+export {default} from './HeaderContentFooter';

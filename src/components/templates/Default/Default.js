@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Input } from 'forms';
+import {Button, Input} from 'forms';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -51,33 +51,33 @@ const BodyWrapper = styled.div`
 const FooterWrapper = styled.div``;
 
 class Default extends React.PureComponent {
-  static propTypes = {
-    className: PropTypes.string,
-    header: PropTypes.node,
-    body: PropTypes.node,
-    footer: PropTypes.node,
-  };
+    static propTypes = {
+        className: PropTypes.string,
+        header: PropTypes.node,
+        body: PropTypes.node,
+        footer: PropTypes.node,
+    };
 
-  static defaultProps = {
-    className: '',
-    header: null,
-    body: null,
-    footer: null,
-  };
+    static defaultProps = {
+        className: '',
+        header: null,
+        body: null,
+        footer: null,
+    };
 
-  render() {
-    const { header, body, footer, ...rest } = this.props;
+    render() {
+        const {header, body, footer, ...rest} = this.props;
 
-    return (
-      <Wrapper {...rest}>
-        <HeaderWrapper>{header}</HeaderWrapper>
+        return (
+            <Wrapper {...rest}>
+                <HeaderWrapper>{header}</HeaderWrapper>
 
-        <BodyWrapper>{body}</BodyWrapper>
+                <BodyWrapper>{body}</BodyWrapper>
 
-        <FooterWrapper>{footer}</FooterWrapper>
-      </Wrapper>
-    );
-  }
+                <FooterWrapper>{footer}</FooterWrapper>
+            </Wrapper>
+        );
+    }
 }
 
 export default Default;

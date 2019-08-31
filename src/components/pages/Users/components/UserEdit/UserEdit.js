@@ -1,20 +1,20 @@
 import React from 'react';
-import { reaction } from 'mobx';
-import { Loader } from 'molecules';
+import {reaction} from 'mobx';
+import {Loader} from 'molecules';
 import styled from 'styled-components';
-import { getParams, history } from 'utils';
-import { withRouter } from 'react-router-dom';
-import { observer, Provider } from 'mobx-react';
-import { Button as Button_, PageHeader } from 'antd';
+import {getParams, history} from 'utils';
+import {withRouter} from 'react-router-dom';
+import {observer, Provider} from 'mobx-react';
+import {Button as Button_, PageHeader} from 'antd';
 
-import { UsersStore } from 'stores/users';
+import {UsersStore} from 'stores/users';
 import UserFormState from 'stores/forms/users/UserForm';
 
-import { UserForm } from '..';
+import {UserForm} from '..';
 
 import AntdForm from '../UserForm/DinamicAntdForm';
 
-const Button = styled(Button_).attrs({ type: 'primary' })``;
+const Button = styled(Button_).attrs({type: 'primary'})``;
 
 const Wrapper = styled.div`
   ${Button} {
@@ -29,76 +29,76 @@ const Wrapper = styled.div`
 @withRouter
 @observer
 class UserEdit extends React.Component {
-  onSuccess = form => {
-    const values = form.values();
-    const { usersStore, onClose } = this;
+    constructor(props) {
+        super(props);
 
-    usersStore.update(getParams(this).id, values)
-      .then(onClose);
-  };
+        const {onSuccess} = this;
+        this.userForm = new UserFormState({onSuccess});
 
-  onClose = () => {
-    history.push('/users');
-  };
+        this.usersStore = UsersStore.create();
+    }
 
-  onError = form => {
-    console.log('onError', { form });
-  };
+    onSuccess = form => {
+        const values = form.values();
+        const {usersStore, onClose} = this;
 
-  onSubmit = () => {
-    this.userForm.submit();
-  };
+        usersStore.update(getParams(this).id, values)
+            .then(onClose);
+    };
 
-  constructor(props) {
-    super(props);
+    onClose = () => {
+        history.push('/users');
+    };
 
-    const { onSuccess } = this;
-    this.userForm = new UserFormState({ onSuccess });
+    onError = form => {
+        console.log('onError', {form});
+    };
 
-    this.usersStore = UsersStore.create();
-  }
+    onSubmit = () => {
+        this.userForm.submit();
+    };
 
-  componentDidMount() {
-    const { userForm, usersStore } = this;
+    componentDidMount() {
+        const {userForm, usersStore} = this;
 
-    this.reactions = [
-      reaction(
-        () => usersStore.data,
-        user => userForm.set('value', user.toJSON()),
-      ),
-    ];
+        this.reactions = [
+            reaction(
+                () => usersStore.data,
+                user => userForm.set('value', user.toJSON()),
+            ),
+        ];
 
-    this.usersStore.get(getParams(this).id);
-  }
+        this.usersStore.get(getParams(this).id);
+    }
 
-  componentWillUnmount() {
-    this.reactions.map(reaction => reaction());
-  }
+    componentWillUnmount() {
+        this.reactions.map(reaction => reaction());
+    }
 
-  render() {
-    const { ...rest } = this.props;
-    const { userForm, usersStore, onSubmit } = this;
+    render() {
+        const {...rest} = this.props;
+        const {userForm, usersStore, onSubmit} = this;
 
-    return (
-      <Provider userForm={userForm}>
-        <Wrapper {...rest}>
-          <PageHeader
-            onBack={history.goBack}
-            title="Users"
-            subTitle="Edit User"
-          />
+        return (
+            <Provider userForm={userForm}>
+                <Wrapper {...rest}>
+                    <PageHeader
+                        onBack={history.goBack}
+                        title="Users"
+                        subTitle="Edit User"
+                    />
 
-          <Loader store={usersStore}>
-            <UserForm/>
+                    <Loader store={usersStore}>
+                        <UserForm/>
 
-            <Button onClick={onSubmit}>Save</Button>
-          </Loader>
+                        <Button onClick={onSubmit}>Save</Button>
+                    </Loader>
 
-          <AntdForm/>
-        </Wrapper>
-      </Provider>
-    );
-  }
+                    <AntdForm/>
+                </Wrapper>
+            </Provider>
+        );
+    }
 }
 
 export default styled(UserEdit)``;

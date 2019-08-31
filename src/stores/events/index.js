@@ -1,1 +1,1 @@
-export { default as EventsStore } from './EventsStore';
+export {default as EventsStore} from './EventsStore';
