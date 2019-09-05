@@ -1,15 +1,15 @@
 import React from 'react';
-import {history} from 'utils';
+import { history } from 'utils';
 import PropTypes from 'prop-types';
-import {EventsStore} from 'stores';
+import { EventsStore } from 'stores';
 import styled from 'styled-components';
-import {List, Loader} from 'molecules';
-import {observer, Provider} from 'mobx-react';
-import {Button as Button_, Typography} from 'antd';
+import { List, Loader } from 'molecules';
+import { observer, Provider } from 'mobx-react';
+import { Button as Button_, Typography } from 'antd';
 
-import {EventRow} from './components';
+import { EventRow } from './components';
 
-const Button = styled(Button_).attrs({type: 'primary'})``;
+const Button = styled(Button_).attrs({ type: 'primary' })``;
 
 const Wrapper = styled.div`
   ${EventRow} {
@@ -33,73 +33,73 @@ const Wrapper = styled.div`
 
 @observer
 class EventList extends React.Component {
-    static propTypes = {
-        className: PropTypes.string,
-    };
+  static propTypes = {
+    className: PropTypes.string,
+  };
 
-    static defaultProps = {
-        className: '',
-    };
+  static defaultProps = {
+    className: '',
+  };
 
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.eventsStore = EventsStore.create();
-    }
+    this.eventsStore = EventsStore.create();
+  }
 
-    onCreate = () => {
-        history.push('/events/create');
-    };
+  onCreate = () => {
+    history.push('/events/create');
+  };
 
-    onView = id => () => {
-        history.push(`/events/${id}`);
-    };
+  onView = id => () => {
+    history.push(`/events/${id}`);
+  };
 
-    onEdit = id => () => {
-        history.push(`/events/${id}/edit`);
-    };
+  onEdit = id => () => {
+    history.push(`/events/${id}/edit`);
+  };
 
-    onDelete = id => () => {
-        const {eventsStore} = this;
+  onDelete = id => () => {
+    const { eventsStore } = this;
 
-        eventsStore.delete(id)
-            .then(() => eventsStore.find());
-    };
+    eventsStore.delete(id)
+      .then(() => eventsStore.find());
+  };
 
-    componentDidMount() {
-        this.eventsStore.find();
-    }
+  componentDidMount() {
+    this.eventsStore.find();
+  }
 
-    render() {
-        const {...rest} = this.props;
-        const {eventsStore, onCreate, onView, onEdit, onDelete} = this;
+  render() {
+    const { ...rest } = this.props;
+    const { eventsStore, onCreate, onView, onEdit, onDelete } = this;
 
-        const events = eventsStore.list.toJSON();
+    const events = eventsStore.list.toJSON();
 
-        return (
-            <Wrapper {...rest}>
-                <Provider>
-                    <>
-                        <Typography.Title>List of Events</Typography.Title>
+    return (
+      <Wrapper {...rest}>
+        <Provider>
+          <>
+            <Typography.Title>List of Events</Typography.Title>
 
-                        <Button onClick={onCreate}>Create</Button>
+            <Button onClick={onCreate}>Create</Button>
 
-                        <Loader store={eventsStore}>
-                            <List
-                                list={events}
-                                onView={onView}
-                                onEdit={onEdit}
-                                onDelete={onDelete}
-                                component={EventRow}
-                            />
-                        </Loader>
+            <Loader store={eventsStore}>
+              <List
+                list={events}
+                onView={onView}
+                onEdit={onEdit}
+                onDelete={onDelete}
+                component={EventRow}
+              />
+            </Loader>
 
-                        <Button onClick={onCreate}>Create</Button>
-                    </>
-                </Provider>
-            </Wrapper>
-        );
-    }
+            <Button onClick={onCreate}>Create</Button>
+          </>
+        </Provider>
+      </Wrapper>
+    );
+  }
 }
 
 export default styled(EventList)``;

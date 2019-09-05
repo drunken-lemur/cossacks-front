@@ -1,1 +1,1 @@
-export {default} from './Fields';
+export { default } from './Fields';

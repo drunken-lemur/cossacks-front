@@ -1,1 +1,1 @@
-export {default} from './EventSubscribe';
+export { default } from './EventSubscribe';

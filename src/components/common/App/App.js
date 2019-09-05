@@ -1,38 +1,38 @@
 import React from 'react';
-import {observer} from 'mobx-react';
-import {Redirect} from 'react-router-dom';
-import {MainProvider, PageGroup} from 'components/common';
-import {Auth, Events, NotFoundPage, Users} from 'pages';
+import { observer } from 'mobx-react';
+import { Redirect } from 'react-router-dom';
+import { MainProvider, PageGroup } from 'components/common';
+import { Auth, Events, NotFoundPage, Users } from 'pages';
 
 const routes = [{
-    path: '/',
-    exact: true,
-    component: () => <Redirect exact from='/' to='/events'/>,
+  path: '/',
+  exact: true,
+  component: () => <Redirect exact from='/' to='/events'/>,
 }, {
-    path: '/auth',
-    component: Auth,
+  path: '/auth',
+  component: Auth,
 }, {
-    path: '/users',
-    isPrivate: true,
-    component: Users,
+  path: '/users',
+  isPrivate: true,
+  component: Users,
 }, {
-    path: '/events',
-    isPrivate: true,
-    component: Events,
+  path: '/events',
+  isPrivate: true,
+  component: Events,
 }, {
-    path: '*',
-    component: NotFoundPage,
+  path: '*',
+  component: NotFoundPage,
 }];
 
 @observer
 class App extends React.Component {
-    render() {
-        return (
-            <MainProvider>
-                <PageGroup routes={routes}/>
-            </MainProvider>
-        );
-    }
+  render() {
+    return (
+      <MainProvider>
+        <PageGroup routes={routes}/>
+      </MainProvider>
+    );
+  }
 }
 
 export default App;

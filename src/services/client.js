@@ -7,9 +7,9 @@ const client = feathers();
 
 client.configure(feathers.socketio(socket));
 client.configure(
-    feathers.authentication({
-        storage: window.localStorage,
-    })
+  feathers.authentication({
+    storage: window.localStorage,
+  }),
 );
 
 export default client;

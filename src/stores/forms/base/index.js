@@ -1,1 +1,1 @@
-export {default as BaseState} from './BaseState';
+export { default as BaseState } from './BaseState';

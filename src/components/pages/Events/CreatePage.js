@@ -1,17 +1,17 @@
 import React from 'react';
-import {HeaderContentFooter} from 'templates';
+import { HeaderContentFooter } from 'templates';
 
-import {EventCreate} from './components';
+import { EventCreate } from './components';
 
 const CreatePage = () => (
-    <HeaderContentFooter
-        breadcrumbs={[
-            {title: 'Events', to: '/events'},
-            {title: 'Create Event'},
-        ]}
-    >
-        <EventCreate/>
-    </HeaderContentFooter>
+  <HeaderContentFooter
+    breadcrumbs={[
+      { title: 'Events', to: '/events' },
+      { title: 'Create Event' },
+    ]}
+  >
+    <EventCreate/>
+  </HeaderContentFooter>
 );
 
 export default CreatePage;

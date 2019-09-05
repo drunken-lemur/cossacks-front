@@ -1,9 +1,9 @@
 import React from 'react';
-import {Layout} from 'antd';
+import { Layout } from 'antd';
 import PropTypes from 'prop-types';
-import {Header} from 'organisms';
-import {Breadcrumb, Footer} from 'molecules';
-import styled, {createGlobalStyle} from 'styled-components';
+import { Header } from 'organisms';
+import { Breadcrumb, Footer } from 'molecules';
+import styled, { createGlobalStyle } from 'styled-components';
 
 const Content = styled(Layout.Content)``;
 
@@ -19,6 +19,7 @@ const Wrapper = styled(Layout)`
     width: 100%;
     position: fixed;
     height: var(--header-height);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
   }
 
   ${Breadcrumb} {
@@ -40,7 +41,9 @@ const Wrapper = styled(Layout)`
   
   ${Footer} {
     line-height: 16px;
+    background: #f0f2f5;
     height: var(--footer-height);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
   }
 `;
 
@@ -63,49 +66,49 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 class HeaderContentFooter extends React.PureComponent {
-    static propTypes = {
-        className: PropTypes.string,
-        header: PropTypes.node,
-        children: PropTypes.node,
-        footer: PropTypes.node,
-        breadcrumbs: PropTypes.arrayOf(
-            PropTypes.shape({
-                label: PropTypes.string,
-                to: PropTypes.string,
-            }),
-        ),
-    };
+  static propTypes = {
+    className: PropTypes.string,
+    header: PropTypes.node,
+    children: PropTypes.node,
+    footer: PropTypes.node,
+    breadcrumbs: PropTypes.arrayOf(
+      PropTypes.shape({
+        label: PropTypes.string,
+        to: PropTypes.string,
+      }),
+    ),
+  };
 
-    static defaultProps = {
-        className: '',
-        header: <Header/>,
-        children: null,
-        footer: <Footer/>,
-        breadcrumbs: [],
-    };
+  static defaultProps = {
+    className: '',
+    header: <Header/>,
+    children: null,
+    footer: <Footer/>,
+    breadcrumbs: [],
+  };
 
-    render() {
-        const {header, children, footer, breadcrumbs, ...rest} = this.props;
+  render() {
+    const { header, children, footer, breadcrumbs, ...rest } = this.props;
 
-        return (
-            <>
-                <GlobalStyle/>
+    return (
+      <>
+        <GlobalStyle/>
 
-                <Wrapper {...rest}>
+        <Wrapper {...rest}>
 
-                    {header}
+          {header}
 
-                    <Content>
-                        <Breadcrumb breadcrumbs={breadcrumbs}/>
+          <Content>
+            <Breadcrumb breadcrumbs={breadcrumbs}/>
 
-                        <Inner>{children}</Inner>
-                    </Content>
+            <Inner>{children}</Inner>
+          </Content>
 
-                    {footer}
-                </Wrapper>
-            </>
-        );
-    }
+          {footer}
+        </Wrapper>
+      </>
+    );
+  }
 }
 
 export default HeaderContentFooter;

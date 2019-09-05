@@ -1,13 +1,13 @@
 import React from 'react';
-import {Menu} from 'molecules';
+import { Menu } from 'molecules';
 import PropTypes from 'prop-types';
-import {Icon, Layout} from 'antd';
+import { Icon, Layout } from 'antd';
 import styled from 'styled-components';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Logo = styled(Icon).attrs({
-    theme: 'filled',
-    type: 'dashboard',
+  theme: 'filled',
+  type: 'dashboard',
 })`
   --logo-size: 2em;
 
@@ -30,27 +30,27 @@ const Wrapper = styled(Layout.Header)`
 `;
 
 class Header extends React.PureComponent {
-    static propTypes = {
-        className: PropTypes.string,
-    };
+  static propTypes = {
+    className: PropTypes.string,
+  };
 
-    static defaultProps = {
-        className: '',
-    };
+  static defaultProps = {
+    className: '',
+  };
 
-    render() {
-        const {...rest} = this.props;
+  render() {
+    const { ...rest } = this.props;
 
-        return (
-            <Wrapper {...rest}>
-                <Link to="/">
-                    <Logo/>
-                </Link>
+    return (
+      <Wrapper {...rest}>
+        <Link to="/">
+          <Logo/>
+        </Link>
 
-                <Menu/>
-            </Wrapper>
-        );
-    }
+        <Menu/>
+      </Wrapper>
+    );
+  }
 }
 
 export default styled(Header)``;

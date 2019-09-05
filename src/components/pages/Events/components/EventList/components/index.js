@@ -1,1 +1,1 @@
-export {default as EventRow} from './EventRow';
+export { default as EventRow } from './EventRow';

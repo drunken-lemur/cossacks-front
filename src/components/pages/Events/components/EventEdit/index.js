@@ -1,1 +1,1 @@
-export {default} from './EventEdit';
+export { default } from './EventEdit';

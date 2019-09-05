@@ -1,4 +1,4 @@
-import {client} from 'services';
+import { client } from 'services';
 
 const Users = client.service('users');
 

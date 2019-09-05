@@ -1,149 +1,149 @@
 import Auth from 'services/Auth';
 import client from 'services/client';
-import {types} from 'mobx-state-tree';
+import { types } from 'mobx-state-tree';
 import User from 'stores/models/User';
 
 const debug = false;
 
 const Statuses = {
-    done: 'done',
-    pending: 'pending',
-    error: 'error',
+  done: 'done',
+  pending: 'pending',
+  error: 'error',
 };
 
 const Payload = types.model('Payload', {
-    aud: types.string,
-    exp: types.number,
-    iat: types.number,
-    iss: types.string,
-    jti: types.string,
-    sub: types.string,
-    userId: types.string,
+  aud: types.string,
+  exp: types.number,
+  iat: types.number,
+  iss: types.string,
+  jti: types.string,
+  sub: types.string,
+  userId: types.string,
 });
 
 const AuthStore = types
-    .model('AuthStore', {
-        user: types.maybeNull(User),
-        accessToken: types.maybeNull(types.string),
-        payload: types.maybeNull(Payload),
-        status: types.maybeNull(types.enumeration(Object.keys(Statuses))),
-        error: types.maybeNull(types.frozen()),
-    })
-    .views(self => ({
-        get isDone() {
-            return self.status === Statuses.done;
-        },
+  .model('AuthStore', {
+    user: types.maybeNull(User),
+    accessToken: types.maybeNull(types.string),
+    payload: types.maybeNull(Payload),
+    status: types.maybeNull(types.enumeration(Object.keys(Statuses))),
+    error: types.maybeNull(types.frozen()),
+  })
+  .views(self => ({
+    get isDone() {
+      return self.status === Statuses.done;
+    },
 
-        get isPending() {
-            return self.status === Statuses.pending;
-        },
+    get isPending() {
+      return self.status === Statuses.pending;
+    },
 
-        get isError() {
-            return self.status === Statuses.error;
-        },
+    get isError() {
+      return self.status === Statuses.error;
+    },
 
-        get isAuthenticated() {
-            return !!self.user;
-        },
-    }))
-    .actions(self => ({
-        afterCreate() {
-            const cleanup = () => {
-                self.setStatusPending();
-                self.setStatusDone();
-            };
+    get isAuthenticated() {
+      return !!self.user;
+    },
+  }))
+  .actions(self => ({
+    afterCreate() {
+      const cleanup = () => {
+        self.setStatusPending();
+        self.setStatusDone();
+      };
 
-            self
-                .login()
-                .then(cleanup)
-                .catch(cleanup);
-        },
+      self
+        .login()
+        .then(cleanup)
+        .catch(cleanup);
+    },
 
-        setAccessToken(response) {
-            debug && console.log('Authenticated!', response);
+    setAccessToken(response) {
+      debug && console.log('Authenticated!', response);
 
-            self.accessToken = response ? response.accessToken : null;
+      self.accessToken = response ? response.accessToken : null;
 
-            if (!response) {
-                return null;
-            }
+      if (!response) {
+        return null;
+      }
 
-            return client.passport.verifyJWT(response.accessToken);
-        },
+      return client.passport.verifyJWT(response.accessToken);
+    },
 
-        setPayload(payload) {
-            debug && console.log('JWT Payload', payload);
+    setPayload(payload) {
+      debug && console.log('JWT Payload', payload);
 
-            self.payload = payload;
+      self.payload = payload;
 
-            if (!payload) {
-                return null;
-            }
+      if (!payload) {
+        return null;
+      }
 
-            return client.service('users').get(payload.userId);
-        },
+      return client.service('users').get(payload.userId);
+    },
 
-        setUser(user) {
-            debug && console.log('User', user);
+    setUser(user) {
+      debug && console.log('User', user);
 
-            client.set('user', user);
+      client.set('user', user);
 
-            self.user = user;
+      self.user = user;
 
-            return user;
-        },
+      return user;
+    },
 
-        login({email, password} = {}) {
-            self.setStatusPending();
+    login({ email, password } = {}) {
+      self.setStatusPending();
 
-            return Auth.authenticate({email, password})
-                .then(self.setAccessToken)
-                .then(self.setPayload)
-                .then(self.setUser)
-                .then(self.setStatusDone)
-                .catch(self.onError);
-        },
+      return Auth.authenticate({ email, password })
+        .then(self.setAccessToken)
+        .then(self.setPayload)
+        .then(self.setUser)
+        .then(self.setStatusDone)
+        .catch(self.onError);
+    },
 
-        setError(error) {
-            self.error = error;
-        },
+    setError(error) {
+      self.error = error;
+    },
 
-        onError(error) {
-            debug && console.log('onError', error);
+    onError(error) {
+      debug && console.log('onError', error);
 
-            self.setStatusError();
+      self.setStatusError();
 
-            self.setError(error);
+      self.setError(error);
 
-            self.logout();
-        },
+      self.logout();
+    },
 
-        logout() {
-            self.user = null;
-            self.payload = null;
-            self.accessToken = null;
+    logout() {
+      self.user = null;
+      self.payload = null;
+      self.accessToken = null;
 
-            return Auth.logout();
-        },
+      return Auth.logout();
+    },
 
-        setStatusDone() {
-            self.status = Statuses.done;
+    setStatusDone() {
+      self.status = Statuses.done;
 
-            return self;
-        },
+      return self;
+    },
 
-        setStatusPending() {
-            self.error = null;
-            self.status = Statuses.pending;
+    setStatusPending() {
+      self.error = null;
+      self.status = Statuses.pending;
 
-            return self;
-        },
+      return self;
+    },
 
-        setStatusError() {
-            self.status = Statuses.error;
+    setStatusError() {
+      self.status = Statuses.error;
 
-            return self;
-        },
-    }));
+      return self;
+    },
+  }));
 
 export default AuthStore;
