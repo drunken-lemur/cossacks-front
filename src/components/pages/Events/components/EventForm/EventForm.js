@@ -1,8 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {inject, observer} from 'mobx-react';
 import {FieldGroup, Form, Input} from 'forms';
+
+import RangeDateTimePicker from './RangeDateTimePicker';
 
 @inject('eventsForm')
 @observer
@@ -14,14 +16,12 @@ class EventForm extends React.Component {
 
     static defaultProps = {
         className: '',
-
     };
 
     fields = {
         name: Input,
         description: Input,
-        start: Input,
-        end: Input,
+        range: RangeDateTimePicker,
     };
 
     render() {

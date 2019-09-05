@@ -4,12 +4,13 @@ import styled from 'styled-components';
 import {inject, observer} from 'mobx-react';
 import {FieldGroup, Form, Input} from 'forms';
 
-@inject('userForm')
+@inject('userForm', 'authStore')
 @observer
 class UserForm extends React.Component {
     static propTypes = {
         className: PropTypes.string,
         userForm: PropTypes.object.isRequired,
+        authStore: PropTypes.object.isRequired,
     };
 
     static defaultProps = {
@@ -24,7 +25,6 @@ class UserForm extends React.Component {
         middleName: Input,
         avatar: Input,
         phone: Input,
-        permissions: Input,
     };
 
     componentDidMount() {
@@ -34,11 +34,16 @@ class UserForm extends React.Component {
     }
 
     render() {
-        const {userForm, ...rest} = this.props;
+        const {userForm, authStore, ...rest} = this.props;
+        const fields = {...this.fields};
+
+        if (authStore.user.permissions.includes('admin')) {
+            fields['permissions'] = Input;
+        }
 
         return (
             <Form {...rest} form={userForm}>
-                <FieldGroup fields={this.fields}/>
+                <FieldGroup fields={fields}/>
             </Form>
         );
     }

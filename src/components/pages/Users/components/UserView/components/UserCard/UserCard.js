@@ -36,7 +36,7 @@ class UserCard extends React.PureComponent {
             middleName,
             avatar,
             phone,
-            permissions,
+            permissions = [],
             ...rest
         } = this.props;
 
@@ -70,7 +70,7 @@ class UserCard extends React.PureComponent {
                             </Descriptions.Item>
 
                             <Descriptions.Item span={3} label="Permissions">
-                                {permissions}
+                                {permissions.join(', ')}
                             </Descriptions.Item>
                         </Descriptions>
                     </Col>
