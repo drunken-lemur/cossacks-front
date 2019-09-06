@@ -31,11 +31,11 @@
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "precommit": "lint-staged",
-    "eslint": "node_modules/.bin/eslint --fix src/"
+    "eslint": "node_modules/.bin/eslint --fix src"
   },
   "lint-staged": {
     "*.{js, jsx}": [
-      "node_modules/.bin/eslint --max-warnings=0"
+      "node_modules/.bin/eslint -fix --max-warnings=0 src"
     ]
   },
   "eslintConfig": {
