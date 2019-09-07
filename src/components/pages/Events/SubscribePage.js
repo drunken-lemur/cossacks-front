@@ -1,11 +1,14 @@
 import * as React from 'react';
-import { Header } from 'organisms';
-import { Default } from 'templates';
+import { HeaderContentFooter } from 'templates';
 
 import { EventSubscribe } from './components';
 
 const SubscribePage = () => (
-  <Default header={<Header/>} body={<EventSubscribe/>}/>
+  <HeaderContentFooter
+    breadcrumbs={[{ title: 'Events', to: '/events' }, { title: 'Event Subscribe' }]}
+  >
+    <EventSubscribe/>
+  </HeaderContentFooter>
 );
 
 export default SubscribePage;

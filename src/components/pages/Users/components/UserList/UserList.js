@@ -1,15 +1,18 @@
 import * as React from 'react';
-import { history } from 'utils';
-import * as PropTypes from 'prop-types';
 import { UsersStore } from 'stores';
 import styled from 'styled-components';
+import * as PropTypes from 'prop-types';
 import { List, Loader } from 'molecules';
 import { observer, Provider } from 'mobx-react';
+import { history, protectByRoles } from 'utils';
 import { Button as Button_, Typography } from 'antd';
 
 import { UserRow } from './components';
 
 const Button = styled(Button_).attrs({ type: 'primary' })``;
+
+const ButtonCreate = protectByRoles('moderator', 'admin')(Button);
+
 
 const Wrapper = styled.div`
   ${UserRow} {
@@ -81,7 +84,7 @@ class UserList extends React.Component {
         <Wrapper {...rest}>
           <Typography.Title>List of Users</Typography.Title>
 
-          <Button onClick={onCreate}>Create</Button>
+          <ButtonCreate onClick={onCreate}>Create</ButtonCreate>
 
           <Loader store={usersStore}>
             <List
@@ -93,7 +96,7 @@ class UserList extends React.Component {
             />
           </Loader>
 
-          <Button onClick={onCreate}>Create</Button>
+          <ButtonCreate onClick={onCreate}>Create</ButtonCreate>
         </Wrapper>
       </Provider>
     );

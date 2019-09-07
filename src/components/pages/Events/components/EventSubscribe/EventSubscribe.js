@@ -1,11 +1,13 @@
 import * as React from 'react';
-import { Button } from 'forms';
+import { PageHeader } from 'antd';
+import { Loader } from 'molecules';
 import { EventsStore } from 'stores';
-import * as PropTypes from 'prop-types';
 import styled from 'styled-components';
+import * as PropTypes from 'prop-types';
 import { getParams, history } from 'utils';
 import { withRouter } from 'react-router-dom';
 import { observer, Provider } from 'mobx-react';
+import { EventCard } from '../EventView/components';
 
 const Wrapper = styled.div``;
 
@@ -35,15 +37,21 @@ class EventSubscribe extends React.Component {
   }
 
   render() {
-    const { onClose } = this;
+    const { eventsStore } = this;
     const { ...rest } = this.props;
 
     return (
       <Provider>
         <Wrapper {...rest}>
-          <div>EventSubscribe</div>
+          <PageHeader
+            onBack={history.goBack}
+            title="Events"
+            subTitle="Event Subscribe"
+          />
 
-          <Button onClick={onClose}>Close</Button>
+          <Loader store={eventsStore}>
+            <EventCard {...eventsStore.data}/>
+          </Loader>
         </Wrapper>
       </Provider>
     );

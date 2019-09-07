@@ -1,12 +1,16 @@
 import * as React from 'react';
-import { noop } from 'utils';
 import moment from 'utils/moment';
-import * as PropTypes from 'prop-types';
 import styled from 'styled-components';
+import * as PropTypes from 'prop-types';
 import { Button as Button_ } from 'antd';
 import { NavLink } from 'react-router-dom';
+import { noop, protectByRoles } from 'utils';
 
 const Button = styled(Button_).attrs({ type: 'primary' })``;
+
+const ButtonEdit = protectByRoles('moderator', 'admin')(Button);
+
+const ButtonDelete = protectByRoles('admin')(Button);
 
 const Wrapper = styled.div`
   ${Button} {
@@ -32,6 +36,7 @@ class EventRow extends React.PureComponent {
     onView: PropTypes.func,
     onEdit: PropTypes.func,
     onDelete: PropTypes.func,
+    onSubscribe: PropTypes.func,
   };
 
   static defaultProps = {
@@ -44,6 +49,7 @@ class EventRow extends React.PureComponent {
     onView: noop,
     onEdit: noop,
     onDelete: noop,
+    onSubscribe: noop,
   };
 
   render() {
@@ -57,6 +63,7 @@ class EventRow extends React.PureComponent {
       onView,
       onEdit,
       onDelete,
+      onSubscribe,
       ...rest
     } = this.props;
 
@@ -93,9 +100,11 @@ class EventRow extends React.PureComponent {
 
         <Button onClick={onView(_id)}>View</Button>
 
-        <Button onClick={onEdit(_id)}>Edit</Button>
+        <ButtonEdit onClick={onEdit(_id)}>Edit</ButtonEdit>
 
-        <Button onClick={onDelete(_id)}>Delete</Button>
+        <ButtonDelete onClick={onDelete(_id)}>Delete</ButtonDelete>
+
+        <Button onClick={onSubscribe(_id)}>Subscribe</Button>
       </Wrapper>
     );
   }

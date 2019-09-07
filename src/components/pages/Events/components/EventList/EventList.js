@@ -1,15 +1,17 @@
 import * as React from 'react';
-import { history } from 'utils';
-import * as PropTypes from 'prop-types';
 import { EventsStore } from 'stores';
 import styled from 'styled-components';
+import * as PropTypes from 'prop-types';
 import { List, Loader } from 'molecules';
 import { observer, Provider } from 'mobx-react';
+import { history, protectByRoles } from 'utils';
 import { Button as Button_, Typography } from 'antd';
 
 import { EventRow } from './components';
 
 const Button = styled(Button_).attrs({ type: 'primary' })``;
+
+const ButtonCreate = protectByRoles('moderator', 'admin')(Button);
 
 const Wrapper = styled.div`
   ${EventRow} {
@@ -66,13 +68,17 @@ class EventList extends React.Component {
       .then(() => eventsStore.find());
   };
 
+  onSubscribe = id => () => {
+    history.push(`/events/${id}/subscribe`);
+  };
+
   componentDidMount() {
     this.eventsStore.find();
   }
 
   render() {
     const { ...rest } = this.props;
-    const { eventsStore, onCreate, onView, onEdit, onDelete } = this;
+    const { eventsStore, onCreate, onView, onEdit, onDelete, onSubscribe } = this;
 
     const events = eventsStore.list.toJSON();
 
@@ -82,7 +88,7 @@ class EventList extends React.Component {
           <>
             <Typography.Title>List of Events</Typography.Title>
 
-            <Button onClick={onCreate}>Create</Button>
+            <ButtonCreate onClick={onCreate}>Create</ButtonCreate>
 
             <Loader store={eventsStore}>
               <List
@@ -91,10 +97,11 @@ class EventList extends React.Component {
                 onEdit={onEdit}
                 onDelete={onDelete}
                 component={EventRow}
+                onSubscribe={onSubscribe}
               />
             </Loader>
 
-            <Button onClick={onCreate}>Create</Button>
+            <ButtonCreate onClick={onCreate}>Create</ButtonCreate>
           </>
         </Provider>
       </Wrapper>

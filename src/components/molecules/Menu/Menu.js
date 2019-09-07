@@ -1,8 +1,9 @@
-import * as React from 'react';
 import * as R from 'ramda';
-import * as PropTypes from 'prop-types';
+import * as React from 'react';
+import { hasAccess } from 'utils';
 import { Menu as Menu_ } from 'antd';
 import styled from 'styled-components';
+import * as PropTypes from 'prop-types';
 import { inject, observer } from 'mobx-react';
 import { Link, withRouter } from 'react-router-dom';
 
@@ -30,12 +31,13 @@ class Menu extends React.PureComponent {
     className: '',
     items: [
       { title: 'Events', to: '/events' },
-      { title: 'Users', to: '/users' },
+      // { title: 'Users', to: '/users' },
     ],
   };
 
   render() {
     const { authStore, location, items, ...rest } = this.props;
+    const { user, isAuthenticated } = authStore;
 
     const props = R.omit(['history', 'match', 'staticContext'], rest);
 
@@ -57,8 +59,18 @@ class Menu extends React.PureComponent {
           </Item>
         ))}
 
-        {!!authStore.isAuthenticated && (
-          <Item onClick={authStore.logout}>Logout ({authStore.user.email})</Item>
+        {hasAccess(user, 'moderator', 'admin') && (
+          <Item key="users">
+            <span>User</span>
+
+            <Link to="/users"/>
+          </Item>
+        )}
+
+        {!!isAuthenticated && (
+          <Item onClick={authStore.logout}>
+            Logout ({authStore.user.email})
+          </Item>
         )}
       </Wrapper>
     );

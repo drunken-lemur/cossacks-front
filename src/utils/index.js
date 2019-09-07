@@ -4,7 +4,8 @@ import { inject, observer } from 'mobx-react';
 import { branch, compose, mapProps } from 'recompose';
 
 export { default as history } from './history';
-export { default as protectByRole } from './protectByRole';
+export { default as hasAccess } from './hasAccess';
+export { default as protectByRoles } from './protectByRoles';
 
 
 export const noop = () => undefined;

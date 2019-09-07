@@ -35,17 +35,18 @@ class EventView extends React.Component {
     this.eventsStore = EventsStore.create();
   }
 
-  onClose = () => {
-    history.push('/events');
-  };
-
   componentWillMount() {
     this.eventsStore.get(getParams(this).id);
   }
 
+  onSubscribe = id => () => {
+    history.push(`/events/${id}/subscribe`);
+  };
+
   render() {
     const { ...rest } = this.props;
-    const { eventsStore } = this;
+    const { eventsStore, onSubscribe } = this;
+    const { _id } = eventsStore.data || {};
 
     return (
       <Provider>
@@ -57,8 +58,13 @@ class EventView extends React.Component {
           />
 
           <Loader store={eventsStore}>
+            <Button onClick={onSubscribe(_id)}>Subscribe</Button>
+
             <EventCard {...eventsStore.data}/>
+
+            <Button onClick={onSubscribe(_id)}>Subscribe</Button>
           </Loader>
+
         </Wrapper>
       </Provider>
     );
