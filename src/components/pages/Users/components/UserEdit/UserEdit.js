@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { reaction } from 'mobx';
 import { Loader } from 'molecules';
 import styled from 'styled-components';
@@ -40,10 +40,6 @@ class UserEdit extends React.Component {
     const { password, ...user } = form.values();
     const { usersStore, onClose } = this;
 
-    if (password) {
-      user['password'] = password;
-    }
-
     usersStore.update(getParams(this).id, user)
       .then(onClose);
   };
@@ -66,7 +62,12 @@ class UserEdit extends React.Component {
     this.reactions = [
       reaction(
         () => usersStore.data,
-        user => userForm.set('value', user.toJSON()),
+        data => {
+          const user = data.toJSON();
+          const permissions = user.permissions.join(', ');
+
+          return userForm.set('value', { ...user, permissions });
+        },
       ),
     ];
 

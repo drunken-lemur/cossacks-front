@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { inject, observer } from 'mobx-react';
 import { Redirect, Route, withRouter } from 'react-router-dom';
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { PageGroup } from 'components/common';
 
 import { CreatePage, EditPage, ListPage, SubscribePage, ViewPage } from './pages';

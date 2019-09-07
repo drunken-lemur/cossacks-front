@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import { Menu } from 'molecules';
-import PropTypes from 'prop-types';
+import * as PropTypes from 'prop-types';
 import { Icon, Layout } from 'antd';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';

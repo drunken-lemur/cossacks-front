@@ -1,9 +1,11 @@
-import React from 'react';
+import * as React from 'react';
 import * as R from 'ramda';
 import { inject, observer } from 'mobx-react';
 import { branch, compose, mapProps } from 'recompose';
 
 export { default as history } from './history';
+export { default as protectByRole } from './protectByRole';
+
 
 export const noop = () => undefined;
 

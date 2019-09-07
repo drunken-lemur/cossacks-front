@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import { Errors } from 'atoms';
-import PropTypes from 'prop-types';
+import * as PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Form } from 'semantic-ui-react';
 import { inject, observer } from 'mobx-react';

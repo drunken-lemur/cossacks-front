@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import { noop } from 'utils';
-import PropTypes from 'prop-types';
+import * as PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Button as Button_ } from 'antd';
 import { NavLink } from 'react-router-dom';

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { history } from 'utils';
 import { Loader } from 'molecules';
 import styled from 'styled-components';

@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import { Button as Button_, PageHeader } from 'antd';
 import { Loader } from 'molecules';
-import PropTypes from 'prop-types';
+import * as PropTypes from 'prop-types';
 import { EventsStore } from 'stores';
 import styled from 'styled-components';
 import { getParams, history } from 'utils';

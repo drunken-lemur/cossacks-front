@@ -1,8 +1,8 @@
-import React from 'react';
+import * as React from 'react';
 import { pathOr } from 'ramda';
 import { Typography } from 'antd';
 import { Loader } from 'molecules';
-import PropTypes from 'prop-types';
+import * as PropTypes from 'prop-types';
 import { UsersStore } from 'stores';
 import styled from 'styled-components';
 import { setDisplayName } from 'recompose';

@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import { Layout } from 'antd';
-import PropTypes from 'prop-types';
+import * as PropTypes from 'prop-types';
 import { Header } from 'organisms';
 import { Breadcrumb, Footer } from 'molecules';
 import styled, { createGlobalStyle } from 'styled-components';

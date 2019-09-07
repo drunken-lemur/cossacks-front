@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { reaction } from 'mobx';
 import moment from 'utils/moment';
 import { Loader } from 'molecules';

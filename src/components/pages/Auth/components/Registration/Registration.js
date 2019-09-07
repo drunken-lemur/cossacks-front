@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import { Typography } from 'antd';
 import { getParams } from 'utils';
-import PropTypes from 'prop-types';
+import * as PropTypes from 'prop-types';
 import { EventsStore } from 'stores';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';

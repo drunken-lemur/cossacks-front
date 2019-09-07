@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import * as R from 'ramda';
-import PropTypes from 'prop-types';
+import * as PropTypes from 'prop-types';
 import { Menu as Menu_ } from 'antd';
 import styled from 'styled-components';
 import { inject, observer } from 'mobx-react';

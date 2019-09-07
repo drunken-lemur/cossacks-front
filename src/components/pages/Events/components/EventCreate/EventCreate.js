@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import { history } from 'utils';
 import { Loader } from 'molecules';
-import PropTypes from 'prop-types';
+import * as PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { observer, Provider } from 'mobx-react';
 import { Button as Button_, PageHeader } from 'antd';

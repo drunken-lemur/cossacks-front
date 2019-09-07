@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import { noop } from 'utils';
-import PropTypes from 'prop-types';
+import * as PropTypes from 'prop-types';
 import { Provider } from 'mobx-react';
 import styled from 'styled-components';
 import { Form as BaseForm } from 'semantic-ui-react';

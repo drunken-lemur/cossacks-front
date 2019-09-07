@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { observer } from 'mobx-react';
 import { Redirect } from 'react-router-dom';
 import { MainProvider, PageGroup } from 'components/common';

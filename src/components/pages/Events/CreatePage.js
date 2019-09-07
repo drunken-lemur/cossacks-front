@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { HeaderContentFooter } from 'templates';
 
 import { EventCreate } from './components';
