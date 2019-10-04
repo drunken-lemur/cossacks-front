@@ -9,6 +9,8 @@ const Event = types.model('Event', {
   start: types.optional(types.string, ''),
   end: types.optional(types.string, ''),
   user: User,
+  participants: types.optional(types.array(User), []),
+  isUserSubscribed: types.boolean,
 });
 
 export default Event;

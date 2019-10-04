@@ -19,11 +19,19 @@ const Logo = styled(Icon).attrs({
 `;
 
 const Wrapper = styled(Layout.Header)`
+  &&& {
+    padding: 0 48px;
+
+    @media (max-width: 768px) {
+      padding: 0 16px;
+    }
+  }
+
   ${Logo} {
     float: left;
     margin: 16px 24px 16px 0;
   }
-  
+
   ${Menu} {
     line-height: 64px;
   }
@@ -44,10 +52,10 @@ class Header extends React.PureComponent {
     return (
       <Wrapper {...rest}>
         <Link to="/">
-          <Logo/>
+          <Logo />
         </Link>
 
-        <Menu/>
+        <Menu />
       </Wrapper>
     );
   }

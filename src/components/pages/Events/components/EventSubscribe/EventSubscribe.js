@@ -1,21 +1,31 @@
 import * as React from 'react';
-import { PageHeader } from 'antd';
 import { Loader } from 'molecules';
 import { EventsStore } from 'stores';
 import styled from 'styled-components';
 import * as PropTypes from 'prop-types';
 import { getParams, history } from 'utils';
 import { withRouter } from 'react-router-dom';
-import { observer, Provider } from 'mobx-react';
+import { Button as Button_, PageHeader } from 'antd';
+import { inject, observer, Provider } from 'mobx-react';
+
+import { EventParticipants } from '..'
 import { EventCard } from '../EventView/components';
 
-const Wrapper = styled.div``;
+const Button = styled(Button_).attrs({ type: 'primary' })``;
+
+const Wrapper = styled.div`
+  ${Button} {
+    margin-top: 16px;
+  }
+`;
 
 @withRouter
+@inject('authStore')
 @observer
 class EventSubscribe extends React.Component {
   static propTypes = {
     className: PropTypes.string,
+    authStore: PropTypes.object.isRequired,
   };
 
   static defaultProps = {
@@ -32,6 +42,18 @@ class EventSubscribe extends React.Component {
     history.push('/events');
   };
 
+  onSubscribe = async () => {
+    const result = await this.eventsStore.subscribe();
+
+    console.log('onSubscribe', { result });
+  };
+
+  onUnsubscribe = async () => {
+    const result = await this.eventsStore.unsubscribe();
+
+    console.log('onUnsubscribe', { result });
+  };
+
   componentWillMount() {
     this.eventsStore.get(getParams(this).id);
   }
@@ -39,6 +61,9 @@ class EventSubscribe extends React.Component {
   render() {
     const { eventsStore } = this;
     const { ...rest } = this.props;
+    const { data, isDone } = eventsStore;
+
+    const isSubscribed = isDone && data.isUserSubscribed;
 
     return (
       <Provider>
@@ -50,8 +75,17 @@ class EventSubscribe extends React.Component {
           />
 
           <Loader store={eventsStore}>
-            <EventCard {...eventsStore.data}/>
+            <EventCard {...data}/>
+
+            {!isSubscribed ? (
+              <Button onClick={this.onSubscribe}>Subscribe</Button>
+            ) : (
+              <Button onClick={this.onUnsubscribe}>Unsubscribe</Button>
+            )}
+
+            {isDone && <EventParticipants participants={data.participants} />}
           </Loader>
+
         </Wrapper>
       </Provider>
     );

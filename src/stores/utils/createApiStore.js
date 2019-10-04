@@ -10,7 +10,13 @@ const noop = () => ({});
 
 const debug = false;
 
-const createApiStore = (model, service = {}, structure = {}, views = noop, actions = noop) => {
+const createApiStore = (
+  model,
+  service = {},
+  structure = {},
+  views = noop,
+  actions = noop
+) => {
   return types
     .model(model.name, {
       data: types.maybeNull(model),
@@ -33,6 +39,10 @@ const createApiStore = (model, service = {}, structure = {}, views = noop, actio
 
       get isError() {
         return self.status === Statuses.error;
+      },
+
+      get service() {
+        return service;
       },
     }))
     .views(views)

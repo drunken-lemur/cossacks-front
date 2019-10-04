@@ -38,7 +38,7 @@ class Loader extends React.Component {
         {this.getErrors()}
 
         <Wrapper {...rest} spinning={store.isPending}>
-          {children}
+          {!store.isError && children}
         </Wrapper>
       </>
     );

@@ -24,21 +24,33 @@ const Wrapper = styled(Layout)`
 
   ${Breadcrumb} {
     line-height: var(--breadcrumb-height);
+
+    @media (max-width: 768px) {
+      padding: 0 16px;
+    }
   }
-  
+
   ${Content} {
     padding: 0 48px;
     overflow: scroll;
     margin-top: var(--header-height);
     height: calc(100vh - var(--header-height) - var(--footer-height));
+
+    @media (max-width: 768px) {
+      padding: 0;
+    }
   }
-  
+
   ${Inner} {
     padding: 24px;
     background: #fff;
     min-height: calc(100% - var(--breadcrumb-height));
+
+    @media (max-width: 768px) {
+      padding: 0 16px;
+    }
   }
-  
+
   ${Footer} {
     line-height: 16px;
     background: #f0f2f5;
@@ -95,7 +107,6 @@ class HeaderContentFooter extends React.PureComponent {
         <GlobalStyle/>
 
         <Wrapper {...rest}>
-
           {header}
 
           <Content>

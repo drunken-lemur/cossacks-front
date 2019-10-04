@@ -1,10 +1,15 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { Layout } from 'antd';
+import styled from 'styled-components';
+import * as PropTypes from 'prop-types';
+import moment from 'utils/moment';
 
 const Wrapper = styled(Layout.Footer)`
-  text-align: center;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 class Footer extends React.PureComponent {
@@ -21,7 +26,8 @@ class Footer extends React.PureComponent {
 
     return (
       <Wrapper {...rest}>
-        Ant Design ©2018 Created by Ant UED
+        <span>Lemur Studio ©{moment().format('YYYY')}</span>
+        <span>Created by Drunken Lemur</span>
       </Wrapper>
     );
   }
