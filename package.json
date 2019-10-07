@@ -35,7 +35,7 @@
   },
   "lint-staged": {
     "*.{js, jsx}": [
-      "node_modules/.bin/eslint src --fix --ignore-pattern build"
+      "node_modules/.bin/eslint src --fix --max-warnings=0 --ignore-pattern build"
     ]
   },
   "eslintConfig": {

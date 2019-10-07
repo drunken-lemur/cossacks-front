@@ -26,8 +26,8 @@ class Footer extends React.PureComponent {
 
     return (
       <Wrapper {...rest}>
-        <span>Lemur Studio ©{moment().format('YYYY')}</span>
         <span>Created by Drunken Lemur</span>
+        <span>Lemur Studio ©{moment().format('YYYY')}</span>
       </Wrapper>
     );
   }

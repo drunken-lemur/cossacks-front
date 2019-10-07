@@ -4,6 +4,11 @@ import * as PropTypes from 'prop-types';
 import { Button as Button_ } from 'antd';
 import { NavLink } from 'react-router-dom';
 import { noop, protectByRoles } from 'utils';
+import { display } from 'theme/mixins';
+
+const InnerWrapper = styled.div``;
+
+const Info = styled.div``;
 
 const Button = styled(Button_).attrs({ type: 'primary' })``;
 
@@ -18,6 +23,15 @@ const Wrapper = styled.div`
     + ${Button} {
       margin-left: 16px;
     }
+  }
+
+  ${InnerWrapper} {
+    ${display('flex')};
+  }
+
+  ${Info} {
+    margin-top: -6px;
+    margin-left: 16px;
   }
 `;
 
@@ -68,41 +82,43 @@ class UserRow extends React.Component {
 
     return (
       <Wrapper {...rest}>
-        <div>
+        <InnerWrapper>
           {!!avatar && (
             <div>
-              <img src={avatar} alt={email}/>
+              <img src={avatar} alt={email} />
             </div>
           )}
 
-          <div>
-            <NavLink to={`/users/${_id}`}>
-              <strong>Email: </strong>
-              {email}
-            </NavLink>
-          </div>
-
-          {!!firstName && (
+          <Info>
             <div>
-              <strong>First name: </strong>
-              {firstName}
+              <NavLink to={`/users/${_id}`}>
+                <strong>Email: </strong>
+                {email}
+              </NavLink>
             </div>
-          )}
 
-          {!!lastName && (
-            <div>
-              <strong>Last name: </strong>
-              {lastName}
-            </div>
-          )}
+            {!!firstName && (
+              <div>
+                <strong>First name: </strong>
+                {firstName}
+              </div>
+            )}
 
-          {!!permissions && !!permissions.length && (
-            <div>
-              <strong>Permissions: </strong>
-              {permissions.join(', ')}
-            </div>
-          )}
-        </div>
+            {!!lastName && (
+              <div>
+                <strong>Last name: </strong>
+                {lastName}
+              </div>
+            )}
+
+            {!!permissions && !!permissions.length && (
+              <div>
+                <strong>Permissions: </strong>
+                {permissions.join(', ')}
+              </div>
+            )}
+          </Info>
+        </InnerWrapper>
 
         <Button onClick={onView(_id)}>View</Button>
 
